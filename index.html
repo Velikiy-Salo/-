@@ -423,275 +423,6 @@
             transform: scale(1.2);
             z-index: 926;
         }
-/* Стили для свернутой легенды */
-.legend.collapsed {
-    min-width: 50px;
-    width: auto;
-    padding: 8px 12px;
-    cursor: pointer;
-    overflow: hidden;
-}
-
-.legend.collapsed .legend-section,
-.legend.collapsed .legend-note {
-    display: none;
-}
-
-.legend.collapsed .legend-toggle-btn {
-    position: static;
-    display: inline-block;
-    margin-bottom: 0;
-    background: #1a3b5d;
-    color: white;
-    border: none;
-    border-radius: 20px;
-    padding: 5px 10px;
-    font-size: 12px;
-    cursor: pointer;
-}
-
-.legend-toggle-btn {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    background: #1a3b5d;
-    color: white;
-    border: none;
-    border-radius: 20px;
-    padding: 4px 8px;
-    font-size: 11px;
-    cursor: pointer;
-    z-index: 1001;
-    transition: background 0.2s;
-}
-
-.legend-toggle-btn:hover {
-    background: #2c4e7a;
-}
-/* Стили для модального окна отзывов */
-.review-modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.7);
-    z-index: 10000;
-    justify-content: center;
-    align-items: center;
-    animation: fadeIn 0.3s;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-.review-modal-content {
-    background: white;
-    width: 90%;
-    max-width: 550px;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 5px 30px rgba(0,0,0,0.3);
-    max-height: 85vh;
-    display: flex;
-    flex-direction: column;
-    animation: slideUp 0.3s;
-}
-
-@keyframes slideUp {
-    from { transform: translateY(50px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
-
-.review-modal-header {
-    background: linear-gradient(135deg, #1a3b5d, #2c4e7a);
-    color: white;
-    padding: 18px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.review-modal-header h3 {
-    margin: 0;
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.review-modal-close {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 28px;
-    cursor: pointer;
-    line-height: 1;
-    transition: transform 0.2s;
-}
-
-.review-modal-close:hover {
-    transform: scale(1.1);
-}
-
-.review-modal-body {
-    padding: 25px;
-    overflow-y: auto;
-    flex: 1;
-}
-
-.rating-stars {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin-bottom: 25px;
-}
-
-.star {
-    font-size: 40px;
-    cursor: pointer;
-    color: #ddd;
-    transition: all 0.2s;
-}
-
-.star:hover {
-    transform: scale(1.1);
-}
-
-.star.active {
-    color: #ffc107;
-    text-shadow: 0 0 5px rgba(255,193,7,0.5);
-}
-
-.review-text {
-    width: 100%;
-    padding: 12px;
-    border: 2px solid #e0e0e0;
-    border-radius: 12px;
-    font-size: 14px;
-    margin-bottom: 20px;
-    resize: vertical;
-    font-family: inherit;
-    transition: border-color 0.2s;
-}
-
-.review-text:focus {
-    outline: none;
-    border-color: #32CD32;
-}
-
-.review-submit {
-    background: linear-gradient(135deg, #32CD32, #28a428);
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 30px;
-    cursor: pointer;
-    font-weight: bold;
-    width: 100%;
-    margin-bottom: 25px;
-    font-size: 16px;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.review-submit:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(50,205,50,0.3);
-}
-
-.reviews-list {
-    border-top: 2px solid #f0f0f0;
-    padding-top: 20px;
-}
-
-.reviews-list h4 {
-    margin-bottom: 15px;
-    color: #1a3b5d;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.reviews-list h4::before {
-    content: "📝";
-    font-size: 18px;
-}
-
-.reviews-container {
-    max-height: 300px;
-    overflow-y: auto;
-}
-
-.review-item {
-    background: #f8f9fa;
-    padding: 15px;
-    border-radius: 12px;
-    margin-bottom: 12px;
-    border-left: 4px solid #32CD32;
-    transition: transform 0.2s;
-}
-
-.review-item:hover {
-    transform: translateX(5px);
-    background: #f0f2f5;
-}
-
-.review-rating {
-    color: #ffc107;
-    margin-bottom: 8px;
-    font-size: 16px;
-    letter-spacing: 2px;
-}
-
-.review-text-item {
-    font-size: 14px;
-    color: #333;
-    margin-bottom: 8px;
-    line-height: 1.4;
-    word-wrap: break-word;
-}
-
-.review-date {
-    font-size: 11px;
-    color: #999;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.review-date::before {
-    content: "🕐";
-    font-size: 10px;
-}
-
-.no-reviews {
-    color: #999;
-    text-align: center;
-    padding: 30px;
-    font-style: italic;
-    background: #fafafa;
-    border-radius: 12px;
-}
-
-/* Средний рейтинг станции */
-.station-rating-badge {
-    display: inline-block;
-    background: #ffc107;
-    color: #333;
-    padding: 2px 8px;
-    border-radius: 20px;
-    font-size: 11px;
-    font-weight: bold;
-    margin-left: 8px;
-}
-
-.average-rating {
-    color: #ffc107;
-    font-weight: bold;
-    margin-left: 5px;
-}
     </style>
 </head>
 <body>
@@ -754,153 +485,160 @@
         <div id="map"></div>
     </div>
 
-<div class="legend">
-    <button class="legend-toggle-btn" onclick="toggleLegend()">📖 Свернуть</button>
-    <div class="legend-section">
-        <h4 onclick="toggleGroup('mcd-group')">
-            <span>🚆 МЦД/МЦК</span>
-            <span id="mcd-group-toggle">▼</span>
-        </h4>
-        <div id="mcd-group" class="group-content">
-            <div class="legend-item">
-                <input type="checkbox" class="group-checkbox" id="chk-mcd-all" checked onchange="toggleAllMCD()">
-                <span style="font-weight: bold;">🔘 Все МЦД/МЦК</span>
-            </div>
-            <div style="margin-left: 15px;">
-                <div class="legend-item"><input type="checkbox" class="line-checkbox" id="chk-d4" checked onchange="toggleLine('d4')"><div class="legend-line" style="background:#32CD32"></div> МЦД-4 (Зелёный)</div>
-                <div class="legend-item"><input type="checkbox" class="line-checkbox" id="chk-d3" checked onchange="toggleLine('d3')"><div class="legend-line" style="background:#f56a00"></div> МЦД-3 (Оранжевый)</div>
-                <div class="legend-item"><input type="checkbox" class="line-checkbox" id="chk-d2" checked onchange="toggleLine('d2')"><div class="legend-line" style="background:#FF69B4"></div> МЦД-2 (Розовый)</div>
-                <div class="legend-item"><input type="checkbox" class="line-checkbox" id="chk-d1" checked onchange="toggleLine('d1')"><div class="legend-line" style="background:#ffba0a"></div> МЦД-1 (Жёлтый)</div>
-                <div class="legend-item"><input type="checkbox" class="line-checkbox" id="chk-mck" checked onchange="toggleLine('mck')"><div class="legend-line" style="background:#6b000e; border: 1px dashed #6b000e;"></div> МЦК</div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="legend-section">
-        <h4 onclick="toggleGroup('suburban-group')">
-            <span>🚆 Направления/БМО</span>
-            <span id="suburban-group-toggle">▼</span>
-        </h4>
-        <div id="suburban-group" class="group-content">
-            <div class="legend-item">
-                <input type="checkbox" class="group-checkbox" id="chk-suburban-all" checked onchange="toggleAllSuburban()">
-                <span style="font-weight: bold;">🔘 Все направления/БМО</span>
-            </div>
-            <div style="margin-left: 15px;">
-                <div class="legend-item"><input type="checkbox" class="line-checkbox" id="chk-gorky" checked onchange="toggleLine('gorky')"><div class="legend-line" style="background:#ffe447"></div> Горьковское направление</div>
-                <div class="legend-item"><input type="checkbox" class="line-checkbox" id="chk-savyolovsky" checked onchange="toggleLine('savyolovsky')"><div class="legend-line" style="background:#5c5c5c"></div> Савёловское направление</div>
-                <div class="legend-item"><input type="checkbox" class="line-checkbox" id="chk-belorussky" checked onchange="toggleLine('belorussky')"><div class="legend-line" style="background:#ff260a"></div> Белорусское направление</div>
-                <div class="legend-item"><input type="checkbox" class="line-checkbox" id="chk-kievsky" checked onchange="toggleLine('kievsky')"><div class="legend-line" style="background:#0013a3"></div> Киевское направление</div>
-                <div class="legend-item"><input type="checkbox" class="line-checkbox" id="chk-kursky" checked onchange="toggleLine('kursky')"><div class="legend-line" style="background:#11bbbb"></div> Курское направление</div>
-                <div class="legend-item"><input type="checkbox" class="line-checkbox" id="chk-paveletsky" checked onchange="toggleLine('paveletsky')"><div class="legend-line" style="background:#99c610"></div> Павелецкое направление</div>
-                <div class="legend-item"><input type="checkbox" class="line-checkbox" id="chk-rizhsky" checked onchange="toggleLine('rizhsky')"><div class="legend-line" style="background:#52f1ff"></div> Рижское направление</div>
-                <div class="legend-item"><input type="checkbox" class="line-checkbox" id="chk-leningradsky" checked onchange="toggleLine('leningradsky')"><div class="legend-line" style="background:#b652ff"></div> Ленинградское направление</div>
-                <div class="legend-item"><input type="checkbox" class="line-checkbox" id="chk-kazansky" checked onchange="toggleLine('kazansky')"><div class="legend-line" style="background:#005203"></div> Казанское направление</div>
-                <div class="legend-item"><input type="checkbox" class="line-checkbox" id="chk-yaroslavsky" checked onchange="toggleLine('yaroslavsky')"><div class="legend-line" style="background:#009be6"></div> Ярославское направление</div>
-                <div class="legend-item"><input type="checkbox" class="line-checkbox" id="chk-bmo" checked onchange="toggleLine('bmo')"><div class="legend-line" style="background:#ff4dcf; border: 2px dashed #ff4dcf;"></div> БМО (Большое кольцо)</div>
+    <div class="legend">
+        <div class="legend-section">
+            <h4 onclick="toggleGroup('mcd-group')">
+                <span>🚆 МЦД/МЦК</span>
+                <span id="mcd-group-toggle">▼</span>
+            </h4>
+            <div id="mcd-group" class="group-content">
+                <div class="legend-item">
+                    <input type="checkbox" class="group-checkbox" id="chk-mcd-all" checked onchange="toggleAllMCD()">
+                    <span style="font-weight: bold;">🔘 Все МЦД/МЦК</span>
+                </div>
+                <div style="margin-left: 15px;">
+                    <div class="legend-item"><input type="checkbox" class="line-checkbox" id="chk-d4" checked onchange="toggleLine('d4')"><div class="legend-line" style="background:#32CD32"></div> МЦД-4 (Зелёный)</div>
+                    <div class="legend-item"><input type="checkbox" class="line-checkbox" id="chk-d3" checked onchange="toggleLine('d3')"><div class="legend-line" style="background:#f56a00"></div> МЦД-3 (Оранжевый)</div>
+                    <div class="legend-item"><input type="checkbox" class="line-checkbox" id="chk-d2" checked onchange="toggleLine('d2')"><div class="legend-line" style="background:#FF69B4"></div> МЦД-2 (Розовый)</div>
+                    <div class="legend-item"><input type="checkbox" class="line-checkbox" id="chk-d1" checked onchange="toggleLine('d1')"><div class="legend-line" style="background:#ffba0a"></div> МЦД-1 (Жёлтый)</div>
+                    <div class="legend-item"><input type="checkbox" class="line-checkbox" id="chk-mck" checked onchange="toggleLine('mck')"><div class="legend-line" style="background:#6b000e; border: 1px dashed #6b000e;"></div> МЦК</div>
+                </div>
             </div>
         </div>
-    </div>
-    
-    <div class="legend-section">
-        <h4>🚏 Особые объекты</h4>
-        <div class="legend-item"><input type="checkbox" class="special-checkbox" id="chk-railway-stations" checked onchange="toggleRailwayStations()"><div class="legend-color" style="background:#1a3b5d; width:16px; height:16px; transform:rotate(45deg); border:2px solid gold;"></div> 🚂 Железнодорожные вокзалы</div>
-        <div class="legend-item"><input type="checkbox" class="special-checkbox" id="chk-airports" checked onchange="toggleAirports()"><div class="legend-color" style="background:#FF4500; width:16px; height:16px; border-radius: 50% 50% 50% 0; transform:rotate(-45deg);"></div> ✈️ Аэропорты</div>
-        <div class="legend-item"><input type="checkbox" class="special-checkbox" id="chk-transfers" checked onchange="toggleTransfers()"><div class="legend-color" style="background:#000000; width:14px; height:14px; transform:rotate(45deg);"></div> 🔀 Пересадочные узлы (ромбы)</div>
-        <div class="legend-item"><input type="checkbox" class="special-checkbox" id="chk-river-stations" checked onchange="toggleRiverStations()"><div class="legend-color" style="background:#1E90FF; width:16px; height:16px; border-radius:4px; border:2px solid white; display:flex; justify-content:center; align-items:center;">🚤</div> 🚤 Речные вокзалы</div>
-    </div>
-    
-    <div class="legend-section">
-        <h4>🚊 Трамвайные маршруты</h4>
-        <div class="legend-item"><input type="checkbox" id="chk-all-trams" checked onchange="toggleAllTrams()"><div class="legend-line" style="background:#FF8C00; width:20px;"></div> 🔘 Все трамваи</div>
-        <div style="margin-left: 15px; max-height: 150px; overflow-y: auto;">
-            <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-T1" checked onchange="toggleTramRoute('T1')"><div class="legend-line" style="background:#7fff00"></div> Т1) Университет - Метрогородок</div>
-            <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-A" checked onchange="toggleTramRoute('A')"><div class="legend-line" style="background:#fcd975"></div> А) Калитники - Чистые пруды</div>
-            <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-1" checked onchange="toggleTramRoute('1')"><div class="legend-line" style="background:#884535"></div> 1) Чертаново Южное - Москворецкий рынок</div>
-            <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-2" checked onchange="toggleTramRoute('2')"><div class="legend-line" style="background:#ffa000"></div> 2) Курский вокзал - 3я Владимирская ул.</div>
-            <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-3" checked onchange="toggleTramRoute('3')"><div class="legend-line" style="background:#979aaa"></div> 3) Чертановская - Чистые пруды</div>
-            <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-4" checked onchange="toggleTramRoute('4')"><div class="legend-line" style="background:#539ee9"></div> 4) Бульвар Рокоссовского - Курский вокзал</div>
-            <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-5" checked onchange="toggleTramRoute('5')"><div class="legend-line" style="background:#ba00cd"></div> 5) Белорусский вокзал - Рижская</div>
-            <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-6" checked onchange="toggleTramRoute('6')"><div class="legend-line" style="background:#ff3849"></div> 6) Братцево - Сокол</div>
-            <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-6k" checked onchange="toggleTramRoute('6k')"><div class="legend-line" style="background:#802d34"></div> 6к) Братцево - Восточный мост</div>
-            <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-7" checked onchange="toggleTramRoute('7')"><div class="legend-line" style="background:#ffb841"></div> 7) Бульвар Рокоссовского - Белорусский вокзал</div>
-            <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-10" checked onchange="toggleTramRoute('10')"><div class="legend-line" style="background:#ff97bb"></div> 10) Улица Кулакова - метро Щукинская</div>
-            <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-11" checked onchange="toggleTramRoute('11')"><div class="legend-line" style="background:#79553d"></div> 11) Останкино - Восточное Измайлово</div>
-            <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-12" checked onchange="toggleTramRoute('12')"><div class="legend-line" style="background:#c5d0e6"></div> 12) Дубровка - Восточное Измайлово</div>
-            <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-13" checked onchange="toggleTramRoute('13')"><div class="legend-line" style="background:#e07300"></div> 13) Метрогородок - Каланчёвская улица</div>
-            <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-14" checked onchange="toggleTramRoute('14')"><div class="legend-line" style="background:#7900c7"></div> 14) Октябрьская - Университет</div>
-            <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-15" checked onchange="toggleTramRoute('15')"><div class="legend-line" style="background:#0013c2"></div> 15) Таллинская улица - Сокол</div>
-            <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-16" checked onchange="toggleTramRoute('16')"><div class="legend-line" style="background:#004524"></div> 16) Чертаново Южное - Даниловская мануфактура</div>
-            <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-17" checked onchange="toggleTramRoute('17')"><div class="legend-line" style="background:#f8f32b"></div> 17) Медведково - Останкино</div>
-            <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-21" checked onchange="toggleTramRoute('21')"><div class="legend-line" style="background:#7fffd4"></div> 21) Таллинская улица - Щукинская</div>
-            <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-23" checked onchange="toggleTramRoute('23')"><div class="legend-line" style="background:#a8e4a0"></div> 23) Михалково - Сокол</div>
-            <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-25" checked onchange="toggleTramRoute('25')"><div class="legend-line" style="background:#44944a"></div> 25) Останкино - Сокольники</div>
-            <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-26" checked onchange="toggleTramRoute('26')"><div class="legend-line" style="background:#ebc2af"></div> 26) Университет - Октябрьская</div>
-            <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-27" checked onchange="toggleTramRoute('27')"><div class="legend-line" style="background:#4b5320"></div> 27) Дмитровская - Войковская</div>
-            <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-28" checked onchange="toggleTramRoute('28')"><div class="legend-line" style="background:#007cad"></div> 28) Проспект Маршала Жукова - Сокол</div>
-            <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-29" checked onchange="toggleTramRoute('29')"><div class="legend-line" style="background:#77dde7"></div> 29) Дмитровская - Михалково</div>
-            <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-30" checked onchange="toggleTramRoute('30')"><div class="legend-line" style="background:#ffc8a8"></div> 30) Улица Кулакова - Михалково</div>
-            <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-31" checked onchange="toggleTramRoute('31')"><div class="legend-line" style="background:#6827e7"></div> 31) Проспект Маршала Жукова - Войковская</div>
-            <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-32" checked onchange="toggleTramRoute('32')"><div class="legend-line" style="background:#8b0000"></div> 32) Курский вокзал - Партизанская</div>
-            <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-36" checked onchange="toggleTramRoute('36')"><div class="legend-line" style="background:#ff271a"></div> 36) Метрогородок - Новогиреево</div>
-            <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-37" checked onchange="toggleTramRoute('37')"><div class="legend-line" style="background:#472a3f"></div> 37) Новогиреево - Каланчёвская улица</div>
-            <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-38" checked onchange="toggleTramRoute('38')"><div class="legend-line" style="background:#8b8940"></div> 38) Черёмушки - ДК «Компрессор»</div>
-            <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-39" checked onchange="toggleTramRoute('39')"><div class="legend-line" style="background:#f64a46"></div> 39) Чистые пруды - Университет</div>
-            <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-43" checked onchange="toggleTramRoute('43')"><div class="legend-line" style="background:#240935"></div> 43) Угрешская - Сокольники</div>
-            <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-46" checked onchange="toggleTramRoute('46')"><div class="legend-line" style="background:#ea8df7"></div> 46) Метрогородок - Калитники</div>
-            <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-47" checked onchange="toggleTramRoute('47')"><div class="legend-line" style="background:#bef574"></div> 47) Нагатино - Октябрьская</div>
-            <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-49" checked onchange="toggleTramRoute('49')"><div class="legend-line" style="background:#d87093"></div> 49) Нагатино - Даниловская Мануфактура</div>
-            <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-50" checked onchange="toggleTramRoute('50')"><div class="legend-line" style="background:#8ccb5e"></div> 50) ДК «Компрессор» - Новослободская</div>
+        
+        <div class="legend-section">
+            <h4 onclick="toggleGroup('suburban-group')">
+                <span>🚆 Направления/БМО</span>
+                <span id="suburban-group-toggle">▼</span>
+            </h4>
+            <div id="suburban-group" class="group-content">
+                <div class="legend-item">
+                    <input type="checkbox" class="group-checkbox" id="chk-suburban-all" checked onchange="toggleAllSuburban()">
+                    <span style="font-weight: bold;">🔘 Все направления/БМО</span>
+                </div>
+                <div style="margin-left: 15px;">
+                    <div class="legend-item"><input type="checkbox" class="line-checkbox" id="chk-gorky" checked onchange="toggleLine('gorky')"><div class="legend-line" style="background:#ffe447"></div> Горьковское направление</div>
+                    <div class="legend-item"><input type="checkbox" class="line-checkbox" id="chk-savyolovsky" checked onchange="toggleLine('savyolovsky')"><div class="legend-line" style="background:#5c5c5c"></div> Савёловское направление</div>
+                    <div class="legend-item"><input type="checkbox" class="line-checkbox" id="chk-belorussky" checked onchange="toggleLine('belorussky')"><div class="legend-line" style="background:#ff260a"></div> Белорусское направление</div>
+                    <div class="legend-item"><input type="checkbox" class="line-checkbox" id="chk-kievsky" checked onchange="toggleLine('kievsky')"><div class="legend-line" style="background:#0013a3"></div> Киевское направление</div>
+                    <div class="legend-item"><input type="checkbox" class="line-checkbox" id="chk-kursky" checked onchange="toggleLine('kursky')"><div class="legend-line" style="background:#11bbbb"></div> Курское направление</div>
+                    <div class="legend-item"><input type="checkbox" class="line-checkbox" id="chk-paveletsky" checked onchange="toggleLine('paveletsky')"><div class="legend-line" style="background:#99c610"></div> Павелецкое направление</div>
+                    <div class="legend-item"><input type="checkbox" class="line-checkbox" id="chk-rizhsky" checked onchange="toggleLine('rizhsky')"><div class="legend-line" style="background:#52f1ff"></div> Рижское направление</div>
+                    <div class="legend-item"><input type="checkbox" class="line-checkbox" id="chk-leningradsky" checked onchange="toggleLine('leningradsky')"><div class="legend-line" style="background:#b652ff"></div> Ленинградское направление</div>
+                    <div class="legend-item"><input type="checkbox" class="line-checkbox" id="chk-kazansky" checked onchange="toggleLine('kazansky')"><div class="legend-line" style="background:#005203"></div> Казанское направление</div>
+                    <div class="legend-item"><input type="checkbox" class="line-checkbox" id="chk-yaroslavsky" checked onchange="toggleLine('yaroslavsky')"><div class="legend-line" style="background:#009be6"></div> Ярославское направление</div>
+                    <div class="legend-item"><input type="checkbox" class="line-checkbox" id="chk-bmo" checked onchange="toggleLine('bmo')"><div class="legend-line" style="background:#ff4dcf; border: 2px dashed #ff4dcf;"></div> БМО (Большое кольцо)</div>
+                </div>
+            </div>
         </div>
-    </div>
-    
-    <div class="legend-section">
-        <h4>🚌 Автобусные остановки</h4>
-        <div class="legend-item"><input type="checkbox" id="chk-all-bus-stops" checked onchange="toggleAllBusStops()"><div class="legend-color" style="background:#17a2b8; width:14px; height:14px; border-radius: 2px;"></div> 🚌 Все автобусные остановки</div>
-        <div style="margin-left: 15px; max-height: 100px; overflow-y: auto;">
-            <div class="legend-item"><input type="checkbox" class="bus-stop-checkbox" id="chk-bus-zheleznodorozhnaya" checked onchange="toggleBusStopGroup('zheleznodorozhnaya')"><div class="legend-color" style="background:#17a2b8; width:10px; height:10px;"></div> МЦД Железнодорожная</div>
-            <div class="legend-item"><input type="checkbox" class="bus-stop-checkbox" id="chk-bus-olgino" checked onchange="toggleBusStopGroup('olgino')"><div class="legend-color" style="background:#17a2b8; width:10px; height:10px;"></div> МЦД Ольгино</div>
-            <div class="legend-item"><input type="checkbox" class="bus-stop-checkbox" id="chk-bus-kuchino" checked onchange="toggleBusStopGroup('kuchino')"><div class="legend-color" style="background:#17a2b8; width:10px; height:10px;"></div> МЦД Кучино</div>
-            <div class="legend-item"><input type="checkbox" class="bus-stop-checkbox" id="chk-bus-saltykovskaya" checked onchange="toggleBusStopGroup('saltykovskaya')"><div class="legend-color" style="background:#17a2b8; width:10px; height:10px;"></div> МЦД Салтыковская</div>
-            <div class="legend-item"><input type="checkbox" class="bus-stop-checkbox" id="chk-bus-nikolskoe" checked onchange="toggleBusStopGroup('nikolskoe')"><div class="legend-color" style="background:#17a2b8; width:10px; height:10px;"></div> МЦД Никольское</div>
-            <div class="legend-item"><input type="checkbox" class="bus-stop-checkbox" id="chk-bus-reutovo" checked onchange="toggleBusStopGroup('reutovo')"><div class="legend-color" style="background:#17a2b8; width:10px; height:10px;"></div> МЦД Реутово</div>
-            <div class="legend-item"><input type="checkbox" class="bus-stop-checkbox" id="chk-bus-novogireevo" checked onchange="toggleBusStopGroup('novogireevo')"><div class="legend-color" style="background:#17a2b8; width:10px; height:10px;"></div> МЦД Новогиреево</div>
-            <div class="legend-item"><input type="checkbox" class="bus-stop-checkbox" id="chk-bus-kuskovo" checked onchange="toggleBusStopGroup('kuskovo')"><div class="legend-color" style="background:#17a2b8; width:10px; height:10px;"></div> МЦД Кусково</div>
-            <div class="legend-item"><input type="checkbox" class="bus-stop-checkbox" id="chk-bus-chuhlinka" checked onchange="toggleBusStopGroup('chuhlinka')"><div class="legend-color" style="background:#17a2b8; width:10px; height:10px;"></div> МЦД Чухлинка</div>
-            <div class="legend-item"><input type="checkbox" class="bus-stop-checkbox" id="chk-bus-nizhegorodskaya" checked onchange="toggleBusStopGroup('nizhegorodskaya')"><div class="legend-color" style="background:#17a2b8; width:10px; height:10px;"></div> МЦД Нижегородская</div>
+        
+        <div class="legend-section">
+            <h4>🚏 Особые объекты</h4>
+            <div class="legend-item"><input type="checkbox" class="special-checkbox" id="chk-railway-stations" checked onchange="toggleRailwayStations()"><div class="legend-color" style="background:#1a3b5d; width:16px; height:16px; transform:rotate(45deg); border:2px solid gold;"></div> 🚂 Железнодорожные вокзалы</div>
+            <div class="legend-item"><input type="checkbox" class="special-checkbox" id="chk-airports" checked onchange="toggleAirports()"><div class="legend-color" style="background:#FF4500; width:16px; height:16px; border-radius: 50% 50% 50% 0; transform:rotate(-45deg);"></div> ✈️ Аэропорты</div>
+            <div class="legend-item"><input type="checkbox" class="special-checkbox" id="chk-transfers" checked onchange="toggleTransfers()"><div class="legend-color" style="background:#000000; width:14px; height:14px; transform:rotate(45deg);"></div> 🔀 Пересадочные узлы (ромбы)</div>
+            <div class="legend-item"><input type="checkbox" class="special-checkbox" id="chk-river-stations" checked onchange="toggleRiverStations()"><div class="legend-color" style="background:#1E90FF; width:16px; height:16px; border-radius:4px; border:2px solid white; display:flex; justify-content:center; align-items:center;">🚤</div> 🚤 Речные вокзалы</div>
         </div>
-    </div>
-    
-    <div class="legend-section">
-        <h4>🏛️ Достопримечательности</h4>
-        <div class="legend-item"><input type="checkbox" class="attraction-checkbox" id="chk-attractions" checked onchange="toggleAttractions()"><div class="legend-color" style="background:gold; width:14px; height:14px; border-radius:2px; border:2px solid #b8860b;"></div> 🏛️ Все достопримечательности</div>
-        <div style="margin-left: 20px; margin-top: 5px;">
-            <div class="legend-item"><input type="checkbox" class="attraction-category" id="chk-attractions-theaters" checked onchange="toggleAttractionCategory('theaters')"><div class="legend-color" style="background:#FF6B6B; width:10px; height:10px; border-radius:2px;"></div> 🎭 Театры</div>
-            <div class="legend-item"><input type="checkbox" class="attraction-category" id="chk-attractions-estates" checked onchange="toggleAttractionCategory('estates')"><div class="legend-color" style="background:#4ECDC4; width:10px; height:10px; border-radius:2px;"></div> 🏛️ Усадьбы</div>
-            <div class="legend-item"><input type="checkbox" class="attraction-category" id="chk-attractions-museums" checked onchange="toggleAttractionCategory('museums')"><div class="legend-color" style="background:#45B7D1; width:10px; height:10px; border-radius:2px;"></div> 🏛️ Музеи</div>
-            <div class="legend-item"><input type="checkbox" class="attraction-category" id="chk-attractions-specialBuildings" checked onchange="toggleAttractionCategory('specialBuildings')"><div class="legend-color" style="background:#96CEB4; width:10px; height:10px; border-radius:2px;"></div> 🏢 Особые здания</div>
-            <div class="legend-item"><input type="checkbox" class="attraction-category" id="chk-attractions-churches" checked onchange="toggleAttractionCategory('churches')"><div class="legend-color" style="background:#FFEAA7; width:10px; height:10px; border-radius:2px;"></div> ⛪ Храмы</div>
-            <div class="legend-item"><input type="checkbox" class="attraction-category" id="chk-attractions-parks" checked onchange="toggleAttractionCategory('parks')"><div class="legend-color" style="background:#88B04B; width:10px; height:10px; border-radius:2px;"></div> 🌳 Парки</div>
+        
+        <div class="legend-section">
+            <h4>🚊 Трамвайные маршруты</h4>
+            <div class="legend-item"><input type="checkbox" id="chk-all-trams" checked onchange="toggleAllTrams()"><div class="legend-line" style="background:#FF8C00; width:20px;"></div> 🔘 Все трамваи</div>
+            <div style="margin-left: 15px; max-height: 150px; overflow-y: auto;">
+                <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-T1" checked onchange="toggleTramRoute('T1')"><div class="legend-line" style="background:#7fff00"></div> Т1) Университет - Метрогородок</div>
+                <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-A" checked onchange="toggleTramRoute('A')"><div class="legend-line" style="background:#fcd975"></div> А) Калитники - Чистые пруды</div>
+                <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-1" checked onchange="toggleTramRoute('1')"><div class="legend-line" style="background:#884535"></div> 1) Чертаново Южное - Москворецкий рынок</div>
+                <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-2" checked onchange="toggleTramRoute('2')"><div class="legend-line" style="background:#ffa000"></div> 2) Курский вокзал - 3я Владимирская ул.</div>
+                <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-3" checked onchange="toggleTramRoute('3')"><div class="legend-line" style="background:#979aaa"></div> 3) Чертановская - Чистые пруды</div>
+                <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-4" checked onchange="toggleTramRoute('4')"><div class="legend-line" style="background:#539ee9"></div> 4) Бульвар Рокоссовского - Курский вокзал</div>
+                <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-5" checked onchange="toggleTramRoute('5')"><div class="legend-line" style="background:#ba00cd"></div> 5) Белорусский вокзал - Рижская</div>
+                <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-6" checked onchange="toggleTramRoute('6')"><div class="legend-line" style="background:#ff3849"></div> 6) Братцево - Сокол</div>
+                <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-6k" checked onchange="toggleTramRoute('6k')"><div class="legend-line" style="background:#802d34"></div> 6к) Братцево - Восточный мост</div>
+                <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-7" checked onchange="toggleTramRoute('7')"><div class="legend-line" style="background:#ffb841"></div> 7) Бульвар Рокоссовского - Белорусский вокзал</div>
+                <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-10" checked onchange="toggleTramRoute('10')"><div class="legend-line" style="background:#ff97bb"></div> 10) Улица Кулакова - метро Щукинская</div>
+                <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-11" checked onchange="toggleTramRoute('11')"><div class="legend-line" style="background:#79553d"></div> 11) Останкино - Восточное Измайлово</div>
+                <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-12" checked onchange="toggleTramRoute('12')"><div class="legend-line" style="background:#c5d0e6"></div> 12) Дубровка - Восточное Измайлово</div>
+                <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-13" checked onchange="toggleTramRoute('13')"><div class="legend-line" style="background:#e07300"></div> 13) Метрогородок - Каланчёвская улица</div>
+                <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-14" checked onchange="toggleTramRoute('14')"><div class="legend-line" style="background:#7900c7"></div> 14) Октябрьская - Университет</div>
+                <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-15" checked onchange="toggleTramRoute('15')"><div class="legend-line" style="background:#0013c2"></div> 15) Таллинская улица - Сокол</div>
+                <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-16" checked onchange="toggleTramRoute('16')"><div class="legend-line" style="background:#004524"></div> 16) Чертаново Южное - Даниловская мануфактура</div>
+                <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-17" checked onchange="toggleTramRoute('17')"><div class="legend-line" style="background:#f8f32b"></div> 17) Медведково - Останкино</div>
+                <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-21" checked onchange="toggleTramRoute('21')"><div class="legend-line" style="background:#7fffd4"></div> 21) Таллинская улица - Щукинская</div>
+                <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-23" checked onchange="toggleTramRoute('23')"><div class="legend-line" style="background:#a8e4a0"></div> 23) Михалково - Сокол</div>
+                <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-25" checked onchange="toggleTramRoute('25')"><div class="legend-line" style="background:#44944a"></div> 25) Останкино - Сокольники</div>
+                <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-26" checked onchange="toggleTramRoute('26')"><div class="legend-line" style="background:#ebc2af"></div> 26) Университет - Октябрьская</div>
+                <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-27" checked onchange="toggleTramRoute('27')"><div class="legend-line" style="background:#4b5320"></div> 27) Дмитровская - Войковская</div>
+                <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-28" checked onchange="toggleTramRoute('28')"><div class="legend-line" style="background:#007cad"></div> 28) Проспект Маршала Жукова - Сокол</div>
+                <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-29" checked onchange="toggleTramRoute('29')"><div class="legend-line" style="background:#77dde7"></div> 29) Дмитровская - Михалково</div>
+                <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-30" checked onchange="toggleTramRoute('30')"><div class="legend-line" style="background:#ffc8a8"></div> 30) Улица Кулакова - Михалково</div>
+                <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-31" checked onchange="toggleTramRoute('31')"><div class="legend-line" style="background:#6827e7"></div> 31) Проспект Маршала Жукова - Войковская</div>
+                <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-32" checked onchange="toggleTramRoute('32')"><div class="legend-line" style="background:#8b0000"></div> 32) Курский вокзал - Партизанская</div>
+                <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-36" checked onchange="toggleTramRoute('36')"><div class="legend-line" style="background:#ff271a"></div> 36) Метрогородок - Новогиреево</div>
+                <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-37" checked onchange="toggleTramRoute('37')"><div class="legend-line" style="background:#472a3f"></div> 37) Новогиреево - Каланчёвская улица</div>
+                <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-38" checked onchange="toggleTramRoute('38')"><div class="legend-line" style="background:#8b8940"></div> 38) Черёмушки - ДК «Компрессор»</div>
+                <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-39" checked onchange="toggleTramRoute('39')"><div class="legend-line" style="background:#f64a46"></div> 39) Чистые пруды - Университет</div>
+                <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-43" checked onchange="toggleTramRoute('43')"><div class="legend-line" style="background:#240935"></div> 43) Угрешская - Сокольники</div>
+                <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-46" checked onchange="toggleTramRoute('46')"><div class="legend-line" style="background:#ea8df7"></div> 46) Метрогородок - Калитники</div>
+                <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-47" checked onchange="toggleTramRoute('47')"><div class="legend-line" style="background:#bef574"></div> 47) Нагатино - Октябрьская</div>
+                <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-49" checked onchange="toggleTramRoute('49')"><div class="legend-line" style="background:#d87093"></div> 49) Нагатино - Даниловская Мануфактура</div>
+                <div class="legend-item"><input type="checkbox" class="tram-checkbox" id="chk-tram-50" checked onchange="toggleTramRoute('50')"><div class="legend-line" style="background:#8ccb5e"></div> 50) ДК «Компрессор» - Новослободская</div>
+            </div>
         </div>
-    </div>
-    
-    <div class="legend-section">
-        <h4>🚤 Речной транспорт</h4>
-        <div class="legend-item"><input type="checkbox" class="river-all-checkbox" id="chk-all-rivers" checked onchange="toggleAllRiverRoutes()"><div class="legend-color" style="background:#000000; width:14px; height:14px; border-radius:2px;"></div> 🔘 Все речные маршруты</div>
-        <div style="margin-left: 15px; margin-top: 5px;">
-            <div class="legend-item"><input type="checkbox" class="river-checkbox" id="chk-river-1" checked onchange="toggleRiverRoute(1)"><div class="river-marker" style="background:#c852ff;"></div> Киевский - Парк Фили</div>
-            <div class="legend-item"><input type="checkbox" class="river-checkbox" id="chk-river-2" checked onchange="toggleRiverRoute(2)"><div class="river-marker" style="background:#a224ff;"></div> ЗИЛ - Печатники</div>
-            <div class="legend-item"><input type="checkbox" class="river-checkbox" id="chk-river-3" checked onchange="toggleRiverRoute(3)"><div class="river-marker" style="background:#7aeb00;"></div> Северный</div>
-            <div class="legend-item"><input type="checkbox" class="river-checkbox" id="chk-river-4" checked onchange="toggleRiverRoute(4)"><div class="river-marker" style="background:#ff2400;"></div> Исторический</div>
-            <div class="legend-item"><input type="checkbox" class="river-checkbox" id="chk-river-5" checked onchange="toggleRiverRoute(5)"><div class="river-marker" style="background:#f19cbb;"></div> Центральный</div>
-            <div class="legend-item"><input type="checkbox" class="river-checkbox" id="chk-river-6" checked onchange="toggleRiverRoute(6)"><div class="river-marker" style="background:#2e39a8;"></div> Круговой</div>
-            <div class="legend-item"><input type="checkbox" class="river-checkbox" id="chk-river-7" checked onchange="toggleRiverRoute(7)"><div class="river-marker" style="background:#ffdb8b;"></div> Серебряный бор</div>
-            <div class="legend-item"><input type="checkbox" class="river-checkbox" id="chk-river-8" checked onchange="toggleRiverRoute(8)"><div class="river-marker" style="background:#ff8b91;"></div> СРВ-Химки</div>
-            <div class="legend-item"><input type="checkbox" class="river-checkbox" id="chk-river-9" checked onchange="toggleRiverRoute(9)"><div class="river-marker" style="background:#2ea836;"></div> Переправа</div>
-            <div class="legend-item"><input type="checkbox" class="river-checkbox" id="chk-river-10" checked onchange="toggleRiverRoute(10)"><div class="river-marker" style="background:#cd7f32;"></div> Южный</div>
-            <div class="legend-item"><input type="checkbox" class="river-checkbox" id="chk-river-11" checked onchange="toggleRiverRoute(11)"><div class="river-marker" style="background:#158078;"></div> Коломенский</div>
+        
+        <div class="legend-section">
+            <h4>🚌 Автобусные остановки</h4>
+            <div class="legend-item"><input type="checkbox" id="chk-all-bus-stops" checked onchange="toggleAllBusStops()"><div class="legend-color" style="background:#17a2b8; width:14px; height:14px; border-radius: 2px;"></div> 🚌 Все автобусные остановки</div>
+            <div style="margin-left: 15px; max-height: 100px; overflow-y: auto;">
+                <div class="legend-item"><input type="checkbox" class="bus-stop-checkbox" id="chk-bus-zheleznodorozhnaya" checked onchange="toggleBusStopGroup('zheleznodorozhnaya')"><div class="legend-color" style="background:#17a2b8; width:10px; height:10px;"></div> МЦД Железнодорожная</div>
+                <div class="legend-item"><input type="checkbox" class="bus-stop-checkbox" id="chk-bus-olgino" checked onchange="toggleBusStopGroup('olgino')"><div class="legend-color" style="background:#17a2b8; width:10px; height:10px;"></div> МЦД Ольгино</div>
+                <div class="legend-item"><input type="checkbox" class="bus-stop-checkbox" id="chk-bus-kuchino" checked onchange="toggleBusStopGroup('kuchino')"><div class="legend-color" style="background:#17a2b8; width:10px; height:10px;"></div> МЦД Кучино</div>
+                <div class="legend-item"><input type="checkbox" class="bus-stop-checkbox" id="chk-bus-saltykovskaya" checked onchange="toggleBusStopGroup('saltykovskaya')"><div class="legend-color" style="background:#17a2b8; width:10px; height:10px;"></div> МЦД Салтыковская</div>
+                <div class="legend-item"><input type="checkbox" class="bus-stop-checkbox" id="chk-bus-nikolskoe" checked onchange="toggleBusStopGroup('nikolskoe')"><div class="legend-color" style="background:#17a2b8; width:10px; height:10px;"></div> МЦД Никольское</div>
+                <div class="legend-item"><input type="checkbox" class="bus-stop-checkbox" id="chk-bus-reutovo" checked onchange="toggleBusStopGroup('reutovo')"><div class="legend-color" style="background:#17a2b8; width:10px; height:10px;"></div> МЦД Реутово</div>
+                <div class="legend-item"><input type="checkbox" class="bus-stop-checkbox" id="chk-bus-novogireevo" checked onchange="toggleBusStopGroup('novogireevo')"><div class="legend-color" style="background:#17a2b8; width:10px; height:10px;"></div> МЦД Новогиреево</div>
+                <div class="legend-item"><input type="checkbox" class="bus-stop-checkbox" id="chk-bus-kuskovo" checked onchange="toggleBusStopGroup('kuskovo')"><div class="legend-color" style="background:#17a2b8; width:10px; height:10px;"></div> МЦД Кусково</div>
+                <div class="legend-item"><input type="checkbox" class="bus-stop-checkbox" id="chk-bus-chuhlinka" checked onchange="toggleBusStopGroup('chuhlinka')"><div class="legend-color" style="background:#17a2b8; width:10px; height:10px;"></div> МЦД Чухлинка</div>
+                <div class="legend-item"><input type="checkbox" class="bus-stop-checkbox" id="chk-bus-nizhegorodskaya" checked onchange="toggleBusStopGroup('nizhegorodskaya')"><div class="legend-color" style="background:#17a2b8; width:10px; height:10px;"></div> МЦД Нижегородская</div>
+            </div>
         </div>
-</div>
+        
+        <div class="legend-section">
+            <h4>🏛️ Достопримечательности</h4>
+            <div class="legend-item"><input type="checkbox" class="attraction-checkbox" id="chk-attractions" checked onchange="toggleAttractions()"><div class="legend-color" style="background:gold; width:14px; height:14px; border-radius:2px; border:2px solid #b8860b;"></div> 🏛️ Все достопримечательности</div>
+            <div style="margin-left: 20px; margin-top: 5px;">
+                <div class="legend-item"><input type="checkbox" class="attraction-category" id="chk-attractions-theaters" checked onchange="toggleAttractionCategory('theaters')"><div class="legend-color" style="background:#FF6B6B; width:10px; height:10px; border-radius:2px;"></div> 🎭 Театры</div>
+                <div class="legend-item"><input type="checkbox" class="attraction-category" id="chk-attractions-estates" checked onchange="toggleAttractionCategory('estates')"><div class="legend-color" style="background:#4ECDC4; width:10px; height:10px; border-radius:2px;"></div> 🏛️ Усадьбы</div>
+                <div class="legend-item"><input type="checkbox" class="attraction-category" id="chk-attractions-museums" checked onchange="toggleAttractionCategory('museums')"><div class="legend-color" style="background:#45B7D1; width:10px; height:10px; border-radius:2px;"></div> 🏛️ Музеи</div>
+                <div class="legend-item"><input type="checkbox" class="attraction-category" id="chk-attractions-specialBuildings" checked onchange="toggleAttractionCategory('specialBuildings')"><div class="legend-color" style="background:#96CEB4; width:10px; height:10px; border-radius:2px;"></div> 🏢 Особые здания</div>
+                <div class="legend-item"><input type="checkbox" class="attraction-category" id="chk-attractions-churches" checked onchange="toggleAttractionCategory('churches')"><div class="legend-color" style="background:#FFEAA7; width:10px; height:10px; border-radius:2px;"></div> ⛪ Храмы</div>
+                <div class="legend-item"><input type="checkbox" class="attraction-category" id="chk-attractions-parks" checked onchange="toggleAttractionCategory('parks')"><div class="legend-color" style="background:#88B04B; width:10px; height:10px; border-radius:2px;"></div> 🌳 Парки</div>
+            </div>
+        </div>
+        
+        <div class="legend-section">
+            <h4>🚤 Речной транспорт</h4>
+            <div class="legend-item"><input type="checkbox" class="river-all-checkbox" id="chk-all-rivers" checked onchange="toggleAllRiverRoutes()"><div class="legend-color" style="background:#000000; width:14px; height:14px; border-radius:2px;"></div> 🔘 Все речные маршруты</div>
+            <div style="margin-left: 15px; margin-top: 5px;">
+                <div class="legend-item"><input type="checkbox" class="river-checkbox" id="chk-river-1" checked onchange="toggleRiverRoute(1)"><div class="river-marker" style="background:#c852ff;"></div> Киевский - Парк Фили</div>
+                <div class="legend-item"><input type="checkbox" class="river-checkbox" id="chk-river-2" checked onchange="toggleRiverRoute(2)"><div class="river-marker" style="background:#a224ff;"></div> ЗИЛ - Печатники</div>
+                <div class="legend-item"><input type="checkbox" class="river-checkbox" id="chk-river-3" checked onchange="toggleRiverRoute(3)"><div class="river-marker" style="background:#7aeb00;"></div> Северный</div>
+                <div class="legend-item"><input type="checkbox" class="river-checkbox" id="chk-river-4" checked onchange="toggleRiverRoute(4)"><div class="river-marker" style="background:#ff2400;"></div> Исторический</div>
+                <div class="legend-item"><input type="checkbox" class="river-checkbox" id="chk-river-5" checked onchange="toggleRiverRoute(5)"><div class="river-marker" style="background:#f19cbb;"></div> Центральный</div>
+                <div class="legend-item"><input type="checkbox" class="river-checkbox" id="chk-river-6" checked onchange="toggleRiverRoute(6)"><div class="river-marker" style="background:#2e39a8;"></div> Круговой</div>
+                <div class="legend-item"><input type="checkbox" class="river-checkbox" id="chk-river-7" checked onchange="toggleRiverRoute(7)"><div class="river-marker" style="background:#ffdb8b;"></div> Серебряный бор</div>
+                <div class="legend-item"><input type="checkbox" class="river-checkbox" id="chk-river-8" checked onchange="toggleRiverRoute(8)"><div class="river-marker" style="background:#ff8b91;"></div> СРВ-Химки</div>
+                <div class="legend-item"><input type="checkbox" class="river-checkbox" id="chk-river-9" checked onchange="toggleRiverRoute(9)"><div class="river-marker" style="background:#2ea836;"></div> Переправа</div>
+                <div class="legend-item"><input type="checkbox" class="river-checkbox" id="chk-river-10" checked onchange="toggleRiverRoute(10)"><div class="river-marker" style="background:#cd7f32;"></div> Южный</div>
+                <div class="legend-item"><input type="checkbox" class="river-checkbox" id="chk-river-11" checked onchange="toggleRiverRoute(11)"><div class="river-marker" style="background:#158078;"></div> Коломенский</div>
+            </div>
+        </div>
+        
+        <div class="legend-note">🔀 Ромбовидные маркеры - пересадочные узлы (можно отключить)</div>
+        <div class="legend-note" style="color: #ff4500;">⚠️ Поиск маршрутов работает только для МЦД/МЦК</div>
+        <div class="legend-note" style="color: #FF8C00;">🚊 Трамвайные маршруты - цветные линии с остановками</div>
+        <div class="legend-note" style="color: #17a2b8;">🚌 Синие маркеры - автобусные остановки</div>
+        <!-- Обновленная заметка о специальной достопримечательности -->
+        <div class="legend-note">🌟 Изолированная достопримечательность в Карибском море</div>
+    </div>
 
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script>
@@ -6320,241 +6058,6 @@
         }
 
         window.onload = initMap;
-
-// Функция для сворачивания/разворачивания легенды
-window.toggleLegend = function() {
-    const legend = document.querySelector('.legend');
-    if (legend) {
-        legend.classList.toggle('collapsed');
-        const btn = legend.querySelector('.legend-toggle-btn');
-        if (legend.classList.contains('collapsed')) {
-            btn.textContent = '📖 Развернуть';
-        } else {
-            btn.textContent = '📖 Свернуть';
-        }
-    }
-}
-// ========== СИСТЕМА ОТЗЫВОВ ДЛЯ СТАНЦИЙ ==========
-let currentStationForReview = null;
-let currentRating = 0;
-
-// Открыть модальное окно для отзыва
-window.openReviewModal = function(stationName) {
-    currentStationForReview = stationName;
-    document.getElementById('modalStationTitle').innerHTML = `✍️ Отзыв о станции: ${stationName}`;
-    document.getElementById('reviewText').value = '';
-    currentRating = 0;
-    updateStarRating(0);
-    loadReviewsForStation(stationName);
-    document.getElementById('reviewModal').style.display = 'flex';
-}
-
-// Закрыть модальное окно
-window.closeReviewModal = function() {
-    document.getElementById('reviewModal').style.display = 'none';
-    currentStationForReview = null;
-}
-
-// Обновление отображения звезд
-function updateStarRating(rating) {
-    const stars = document.querySelectorAll('.star');
-    stars.forEach((star, index) => {
-        if (index < rating) {
-            star.textContent = '★';
-            star.classList.add('active');
-        } else {
-            star.textContent = '☆';
-            star.classList.remove('active');
-        }
-    });
-    currentRating = rating;
-}
-
-// Получение отзывов для станции
-function getStationReviews(stationName) {
-    const data = localStorage.getItem(`review_${stationName}`);
-    if (data) {
-        return JSON.parse(data);
-    }
-    return [];
-}
-
-// Сохранение отзыва
-window.submitReview = function() {
-    if (!currentStationForReview) return;
-    
-    const text = document.getElementById('reviewText').value.trim();
-    
-    if (currentRating === 0 && !text) {
-        alert('Пожалуйста, поставьте оценку (от 1 до 5 звезд) или напишите отзыв');
-        return;
-    }
-    
-    const reviews = getStationReviews(currentStationForReview);
-    reviews.unshift({
-        rating: currentRating,
-        text: text || "Без текста",
-        date: new Date().toLocaleString('ru-RU', {
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
-        })
-    });
-    
-    localStorage.setItem(`review_${currentStationForReview}`, JSON.stringify(reviews));
-    loadReviewsForStation(currentStationForReview);
-    document.getElementById('reviewText').value = '';
-    updateStarRating(0);
-    
-    // Показываем уведомление
-    const btn = document.querySelector('.review-submit');
-    const originalText = btn.textContent;
-    btn.textContent = '✓ Отправлено!';
-    btn.style.background = '#28a745';
-    setTimeout(() => {
-        btn.textContent = originalText;
-        btn.style.background = 'linear-gradient(135deg, #32CD32, #28a428)';
-    }, 2000);
-}
-
-// Загрузка и отображение отзывов
-function loadReviewsForStation(stationName) {
-    const reviews = getStationReviews(stationName);
-    const container = document.getElementById('reviewsContainer');
-    
-    if (reviews.length === 0) {
-        container.innerHTML = '<div class="no-reviews">📭 Нет отзывов. Будьте первым, кто оценит эту станцию!</div>';
-        return;
-    }
-    
-    let html = '';
-    reviews.forEach(review => {
-        let stars = '';
-        for (let i = 0; i < 5; i++) {
-            stars += i < review.rating ? '★' : '☆';
-        }
-        html += `
-            <div class="review-item">
-                <div class="review-rating">${stars}</div>
-                <div class="review-text-item">${escapeHtml(review.text)}</div>
-                <div class="review-date">${review.date}</div>
-            </div>
-        `;
-    });
-    container.innerHTML = html;
-}
-
-// Функция для экранирования HTML-символов
-function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
-}
-
-// Функция для получения среднего рейтинга станции
-function getStationAverageRating(stationName) {
-    const reviews = getStationReviews(stationName);
-    if (reviews.length === 0) return 0;
-    
-    const total = reviews.reduce((sum, review) => sum + review.rating, 0);
-    return (total / reviews.length).toFixed(1);
-}
-
-// Функция для создания попапа с кнопкой отзыва и рейтингом
-function getStationPopupWithReview(station) {
-    var lines = [];
-    var info = '<b>' + station.name + '</b>';
-    
-    // Добавляем средний рейтинг
-    const avgRating = getStationAverageRating(station.name);
-    if (avgRating > 0) {
-        let stars = '';
-        for (let i = 0; i < 5; i++) {
-            stars += i < Math.floor(avgRating) ? '★' : (i < avgRating ? '½' : '☆');
-        }
-        info += `<div class="average-rating" style="margin-top: 5px;">⭐ ${stars} (${avgRating})</div>`;
-    }
-    
-    if (station.line === 'd1') lines.push('МЦД-1');
-    if (station.line === 'd2') lines.push('МЦД-2');
-    if (station.line === 'd3') lines.push('МЦД-3');
-    if (station.line === 'd4') lines.push('МЦД-4');
-    if (station.line === 'gorky') lines.push('Горьковское');
-    if (station.line === 'savyolovsky') lines.push('Савёловское');
-    if (station.line === 'belorussky') lines.push('Белорусское');
-    if (station.line === 'kievsky') lines.push('Киевское');
-    if (station.line === 'kursky') lines.push('Курское');
-    if (station.line === 'paveletsky') lines.push('Павелецкое');
-    if (station.line === 'rizhsky') lines.push('Рижское');
-    if (station.line === 'leningradsky') lines.push('Ленинградское');
-    if (station.line === 'kazansky') lines.push('Казанское');
-    if (station.line === 'yaroslavsky') lines.push('Ярославское');
-    if (station.line === 'mck') lines.push('МЦК');
-    if (station.line === 'bmo') lines.push('БМО');
-    
-    if (lines.length > 0) {
-        info += '<br><span style="font-size: 11px;">' + lines.join(' • ') + '</span>';
-    }
-    
-    if (station.note) {
-        info += '<br><small>' + station.note + '</small>';
-    }
-    
-    // Считаем количество отзывов
-    const reviewsCount = getStationReviews(station.name).length;
-    info += `<br><span style="font-size: 10px; color: #666;">📝 ${reviewsCount} отзывов</span>`;
-    
-    // Добавляем кнопку отзыва
-    info += `<br><button onclick="openReviewModal('${station.name.replace(/'/g, "\\'")}')" style="margin-top:8px; background: linear-gradient(135deg, #1a3b5d, #2c4e7a); color:white; border:none; padding:6px 14px; border-radius:20px; cursor:pointer; font-size:12px; transition: transform 0.2s;">✍️ Написать отзыв</button>`;
-    
-    return info;
-}
-
-// Переопределяем функцию добавления станций
-function addStationsToLayerWithReview(stations, color, layerName) {
-    stations.forEach(function(station) {
-        var isTransfer = transferStations && transferStations.includes(station.name);
-        var icon = getStationIcon(color, isTransfer);
-        var popupContent = getStationPopupWithReview(station);
-        var marker = L.marker(station.coords, { icon: icon }).bindPopup(popupContent);
-        allLayers[layerName].push(marker);
-    });
-}
-
-// Сохраняем оригинальную функцию и заменяем её
-window.originalAddStationsToLayer = window.addStationsToLayer;
-window.addStationsToLayer = addStationsToLayerWithReview;
-
-// Инициализация звезд
-document.addEventListener('DOMContentLoaded', function() {
-    const stars = document.querySelectorAll('.star');
-    stars.forEach(star => {
-        star.addEventListener('click', function() {
-            const rating = parseInt(this.getAttribute('data-rating'));
-            updateStarRating(rating);
-        });
-        star.addEventListener('mouseenter', function() {
-            const rating = parseInt(this.getAttribute('data-rating'));
-            const allStars = document.querySelectorAll('.star');
-            allStars.forEach((s, i) => {
-                if (i < rating) s.textContent = '★';
-                else s.textContent = '☆';
-            });
-        });
-        star.addEventListener('mouseleave', function() {
-            updateStarRating(currentRating);
-        });
-    });
-});
-// Закрытие модального окна при клике на фон
-window.onclick = function(event) {
-    const modal = document.getElementById('reviewModal');
-    if (event.target === modal) {
-        closeReviewModal();
-    }
-}
     </script>
 <script>
 // ========== УНИВЕРСАЛЬНЫЙ СКРИПТ ДЛЯ КНОПКИ "РАСПИСАНИЕ" (МЦД + МЦК) ==========
@@ -6687,31 +6190,419 @@ window.onclick = function(event) {
     console.log('✅ Скрипт готов! Кликните на станцию на карте → появится кнопка "Посмотреть расписание"');
 })();
 </script>
-<!-- Модальное окно для отзывов -->
-<div id="reviewModal" class="review-modal">
-    <div class="review-modal-content">
-        <div class="review-modal-header">
-            <h3 id="modalStationTitle">Оставить отзыв о станции</h3>
-            <button class="review-modal-close" onclick="closeReviewModal()">&times;</button>
-        </div>
-        <div class="review-modal-body">
-            <div class="rating-stars" id="ratingStars">
-                <span class="star" data-rating="1">☆</span>
-                <span class="star" data-rating="2">☆</span>
-                <span class="star" data-rating="3">☆</span>
-                <span class="star" data-rating="4">☆</span>
-                <span class="star" data-rating="5">☆</span>
-            </div>
-            <textarea id="reviewText" class="review-text" rows="4" placeholder="Напишите ваш отзыв о станции..."></textarea>
-            <button class="review-submit" onclick="submitReview()">✍️ Отправить отзыв</button>
-            <div class="reviews-list">
-                <h4>Отзывы пользователей</h4>
-                <div id="reviewsContainer" class="reviews-container">
-                    <div class="no-reviews">Нет отзывов. Будьте первым!</div>
+<script>
+// ========== РАСПИСАНИЕ ДЛЯ ВСЕХ СТАНЦИЙ И ОСТАНОВОК ==========
+(function() {
+    // Создаём модальное окно для сообщения
+    if (!document.getElementById('scheduleModal')) {
+        var modalDiv = document.createElement('div');
+        modalDiv.id = 'scheduleModal';
+        modalDiv.style.cssText = 'display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:10000; justify-content:center; align-items:center;';
+        modalDiv.innerHTML = `
+            <div style="background:white; width:90%; max-width:500px; border-radius:20px; overflow:auto; text-align:center;">
+                <div style="background:#1a3b5d; color:white; padding:15px 20px; display:flex; justify-content:space-between;">
+                    <h2 id="modalStationName" style="margin:0;">Станция</h2>
+                    <button id="closeModalBtn" style="background:none; border:none; color:white; font-size:28px; cursor:pointer; line-height:1;">&times;</button>
+                </div>
+                <div id="modalLineBadge" style="padding:8px 20px; background:#f0f0f0; font-size:12px;"></div>
+                <div id="scheduleMessage" style="padding:40px 20px;">
+                    <div style="font-size:48px; margin-bottom:20px;">🚧</div>
+                    <div style="font-size:18px; font-weight:bold; margin-bottom:10px;">В данный момент сайт находится в бета-тесте</div>
+                    <div style="font-size:14px; color:#666;">Просмотр расписания временно не работает</div>
+                    <div style="font-size:12px; color:#999; margin-top:20px;">Функция будет доступна в ближайшее время</div>
                 </div>
             </div>
+        `;
+        document.body.appendChild(modalDiv);
+        
+        document.getElementById('closeModalBtn').onclick = function() {
+            document.getElementById('scheduleModal').style.display = 'none';
+        };
+        window.onclick = function(e) {
+            var modal = document.getElementById('scheduleModal');
+            if (e.target === modal) modal.style.display = 'none';
+        };
+    }
+    
+    window.showStationSchedule = function(stationName, line) {
+        var modal = document.getElementById('scheduleModal');
+        var modalStationName = document.getElementById('modalStationName');
+        var modalLineBadge = document.getElementById('modalLineBadge');
+        if (!modal) return;
+        modalStationName.innerText = stationName;
+        modalLineBadge.innerText = line || 'МЦД / МЦК / Трамвай';
+        modal.style.display = 'flex';
+    };
+    
+    // Список всех станций для поиска в попапах
+    var allStations = [
+        "Одинцово","Баковка","Сколково","Немчиновка","Сетунь","Рабочий Посёлок","Славянский бульвар","Фили","Тестовская","Беговая","Белорусская","Савёловская","Тимирязевская","Петровско-Разумовская","Окружная","Дегунино","Бескудниково","Лианозово","Марк","Новодачная","Долгопрудная","Водники","Хлебниково","Шереметьевская","Лобня",
+        "Подольск","Силикатная","Остафьево","Щербинка","Бутово","Битца","Красный Строитель","Покровское","Царицыно","Москворечье","Курьяново","Люблино","Печатники","Текстильщики","Новохохловская","Калитники","Москва Товарная","Курская","Площадь трёх вокзалов","Рижская","Марьина Роща","Дмитровская","Гражданская","Красный Балтиец","Стрешнево","Щукинская","Тушинская","Трикотажная","Волоколамская","Пенягино","Павшино","Красногорская","Опалиха","Аникеевка","Нахабино",
+        "Ипподром","Раменское","Фабричная","Есенинская","Кратово","Отдых","Быково","Удельная","Малаховка","Красково","Томилино","Панки","Люберцы-1","Ухтомская","Косино","Выхино","Вешняки","Плющево","Перово","Андроновка","Авиамоторная","Сортировочная","Электрозаводская","Митьково","Останкино","Лихоборы","Моссельмаш","Грачёвская","Ховрино","Химки","Молжаниново","Новоподрезково","Подрезково","Сходня","Фирсановская","Зеленоград-Крюково",
+        "Железнодорожная","Ольгино","Кучино","Салтыковская","Никольская","Реутов","Новогиреево","Кусково","Чухлинка","Нижегородская","Серп и Молот","Кутузовская","Поклонная","Минская","Матвеевская","Аминьевская","Очаково","Мещерская","Солнечная","Переделкино","Мичуринец","Внуково","Лесной Городок","Толстопальцево","Кокошкино","Санино","Крёкшино","Победа","Апрелевка",
+        "Окружная","Владыкино","Ботанический сад","Ростокино","Белокаменная","Бульвар Рокоссовского","Локомотив","Измайлово","Соколиная Гора","Шоссе Энтузиастов","Андроновка","Нижегородская","Новохохловская","Угрешская","Дубровка","Автозаводская","ЗИЛ","Верхние Котлы","Крымская","Площадь Гагарина","Лужники","Кутузовская","Деловой центр","Шелепиха","Хорошёво","Зорге","Панфиловская","Стрешнево","Балтийская","Коптево","Лихоборы",
+        "Т1","А","1","2","3","4","5","6","6к","7","10","11","12","13","14","15","16","17","21","23","25","26","27","28","29","30","31","32","36","37","38","39","43","46","47","49","50"
+    ];
+    
+    // Добавляем кнопки ко всем маркерам на карте
+    setTimeout(function() {
+        if (window.map && window.map.eachLayer) {
+            window.map.eachLayer(function(layer) {
+                if (layer.getPopup && layer.getPopup()) {
+                    var popup = layer.getPopup();
+                    var content = popup.getContent ? popup.getContent() : '';
+                    if (typeof content === 'string') {
+                        var stationName = null;
+                        for (var i = 0; i < allStations.length; i++) {
+                            if (content.indexOf(allStations[i]) !== -1) {
+                                stationName = allStations[i];
+                                break;
+                            }
+                        }
+                        if (stationName && content.indexOf('showStationSchedule') === -1) {
+                            var newContent = content + '<br><button onclick="showStationSchedule(\'' + stationName + '\')" style="margin-top:8px; background:#1a3b5d; color:white; border:none; padding:5px 12px; border-radius:20px; cursor:pointer;">📋 Посмотреть расписание</button>';
+                            layer.unbindPopup();
+                            layer.bindPopup(newContent);
+                        }
+                    }
+                }
+            });
+            console.log('✅ Кнопки расписания добавлены');
+        }
+    }, 1500);
+    
+    // Перехватываем добавление новых маркеров
+    if (window.L && L.Marker) {
+        var originalAddTo = L.Marker.prototype.addTo;
+        L.Marker.prototype.addTo = function(map) {
+            originalAddTo.call(this, map);
+            var self = this;
+            setTimeout(function() {
+                var popup = self.getPopup();
+                if (popup && popup.getContent) {
+                    var content = popup.getContent();
+                    if (typeof content === 'string' && content.indexOf('showStationSchedule') === -1) {
+                        var stationName = null;
+                        for (var i = 0; i < allStations.length; i++) {
+                            if (content.indexOf(allStations[i]) !== -1) {
+                                stationName = allStations[i];
+                                break;
+                            }
+                        }
+                        if (stationName) {
+                            var newContent = content + '<br><button onclick="showStationSchedule(\'' + stationName + '\')" style="margin-top:8px; background:#1a3b5d; color:white; border:none; padding:5px 12px; border-radius:20px; cursor:pointer;">📋 Посмотреть расписание</button>';
+                            self.unbindPopup().bindPopup(newContent);
+                        }
+                    }
+                }
+            }, 100);
+            return this;
+        };
+    }
+    
+    console.log('✅ Скрипт расписания загружен');
+})();
+</script>
+<script>
+// ========== ПЕРЕКЛЮЧЕНИЕ ПАНЕЛЕЙ ПОИСКА МАРШРУТА ==========
+(function() {
+    // Создаём кнопки переключения
+    var searchContainer = document.querySelector('.route-search');
+    if (!searchContainer) return;
+    
+    // Сохраняем оригинальное содержимое
+    var originalContent = searchContainer.innerHTML;
+    
+    // Создаём кнопки переключения
+    var toggleDiv = document.createElement('div');
+    toggleDiv.className = 'route-type-toggle';
+    toggleDiv.style.cssText = 'display:flex; gap:10px; margin-bottom:15px; background:#e9ecef; border-radius:8px; padding:4px;';
+    toggleDiv.innerHTML = `
+        <button id="btnMCD" class="route-type-btn active" style="flex:1; padding:8px; border:none; border-radius:6px; cursor:pointer; font-weight:bold; background:#1a3b5d; color:white;">🚆 МЦД/МЦК</button>
+        <button id="btnTram" class="route-type-btn" style="flex:1; padding:8px; border:none; border-radius:6px; cursor:pointer; font-weight:bold; background:transparent;">🚊 Трамваи</button>
+    `;
+    
+    // Вставляем кнопки перед формой поиска
+    searchContainer.insertBefore(toggleDiv, searchContainer.firstChild);
+    
+    // Панель для трамваев
+    var tramPanel = document.createElement('div');
+    tramPanel.id = 'tramSearchPanel';
+    tramPanel.style.display = 'none';
+    tramPanel.innerHTML = `
+        <input type="text" id="fromTram" placeholder="Откуда (маршрут или остановка)" list="tram-list">
+        <input type="text" id="toTram" placeholder="Куда (маршрут или остановка)" list="tram-list">
+        <datalist id="tram-list">
+            <option value="Т1) Университет - Метрогородок">
+            <option value="А) Калитники - Чистые пруды">
+            <option value="1) Чертаново Южное - Москворецкий рынок">
+            <option value="2) Курский вокзал - 3я Владимирская ул.">
+            <option value="3) Чертановская - Чистые пруды">
+            <option value="4) Бульвар Рокоссовского - Курский вокзал">
+            <option value="5) Белорусский вокзал - Рижская">
+            <option value="6) Братцево - Сокол">
+            <option value="7) Бульвар Рокоссовского - Белорусский вокзал">
+            <option value="10) Улица Кулакова - метро Щукинская">
+            <option value="11) Останкино - Восточное Измайлово">
+            <option value="12) Дубровка - Восточное Измайлово">
+            <option value="13) Метрогородок - Каланчёвская улица">
+            <option value="14) Октябрьская - Университет">
+            <option value="15) Таллинская улица - Сокол">
+            <option value="16) Чертаново Южное - Даниловская мануфактура">
+            <option value="17) Медведково - Останкино">
+            <option value="21) Таллинская улица - Щукинская">
+            <option value="23) Михалково - Сокол">
+            <option value="25) Останкино - Сокольники">
+            <option value="26) Университет - Октябрьская">
+            <option value="27) Дмитровская - Войковская">
+            <option value="28) Проспект Маршала Жукова - Сокол">
+            <option value="29) Дмитровская - Михалково">
+            <option value="30) Улица Кулакова - Михалково">
+            <option value="31) Проспект Маршала Жукова - Войковская">
+            <option value="32) Курский вокзал - Партизанская">
+            <option value="36) Метрогородок - Новогиреево">
+            <option value="37) Новогиреево - Каланчёвская улица">
+            <option value="38) Черёмушки - ДК Компрессор">
+            <option value="39) Чистые пруды - Университет">
+            <option value="43) Угрешская - Сокольники">
+            <option value="46) Метрогородок - Калитники">
+            <option value="47) Нагатино - Октябрьская">
+            <option value="49) Нагатино - Даниловская Мануфактура">
+            <option value="50) ДК Компрессор - Новослободская">
+        </datalist>
+        <div style="display: flex; gap: 5px; margin-top: 8px;">
+            <button onclick="findTramRoute()" style="flex:2; background:#FF8C00;">🚊 Найти маршрут</button>
+            <button onclick="clearTramRoute()" style="flex:1; background:#6c757d;">✕ Очистить</button>
         </div>
-    </div>
-</div>
+        <div id="tramRouteInfo" style="margin-top: 10px; display: none;"></div>
+    `;
+    
+    // Вставляем панель трамваев после МЦД панели
+    var mcdPanel = document.querySelector('.route-search .route-type-toggle').nextSibling;
+    searchContainer.appendChild(tramPanel);
+    
+    // Переключатель
+    document.getElementById('btnMCD').onclick = function() {
+        document.getElementById('btnMCD').style.background = '#1a3b5d';
+        document.getElementById('btnMCD').style.color = 'white';
+        document.getElementById('btnTram').style.background = 'transparent';
+        document.getElementById('btnTram').style.color = 'black';
+        document.querySelector('.route-search').children[1].style.display = 'block';
+        document.getElementById('tramSearchPanel').style.display = 'none';
+    };
+    
+    document.getElementById('btnTram').onclick = function() {
+        document.getElementById('btnTram').style.background = '#1a3b5d';
+        document.getElementById('btnTram').style.color = 'white';
+        document.getElementById('btnMCD').style.background = 'transparent';
+        document.getElementById('btnMCD').style.color = 'black';
+        document.querySelector('.route-search').children[1].style.display = 'none';
+        document.getElementById('tramSearchPanel').style.display = 'block';
+    };
+    
+    // Функция поиска маршрута трамвая
+    window.findTramRoute = function() {
+        var from = document.getElementById('fromTram').value;
+        var to = document.getElementById('toTram').value;
+        if (!from || !to) {
+            alert('Пожалуйста, укажите начальный и конечный маршрут');
+            return;
+        }
+        var infoDiv = document.getElementById('tramRouteInfo');
+        infoDiv.style.display = 'block';
+        infoDiv.innerHTML = '<div style="background: #FF8C0020; padding:10px; border-radius:4px; border-left:4px solid #FF8C00;"><b>🚊 Маршрут трамвая</b><br>' + from + ' → ' + to + '<br><br><span style="color:#666;">⚠️ Поиск маршрутов для трамваев находится в разработке</span></div>';
+    };
+    
+    window.clearTramRoute = function() {
+        document.getElementById('fromTram').value = '';
+        document.getElementById('toTram').value = '';
+        document.getElementById('tramRouteInfo').style.display = 'none';
+    };
+    
+    console.log('✅ Панель поиска трамваев добавлена');
+})();
+</script>
+<script>
+// ========== ОТЗЫВЫ ДЛЯ ТРАМВАЕВ ==========
+(function() {
+    var tramReviews = [];
+    var TRAM_STORAGE_KEY = 'tram_reviews';
+    
+    var TRAM_ROUTES = [
+        "Т1) Университет - Метрогородок", "А) Калитники - Чистые пруды",
+        "1) Чертаново Южное - Москворецкий рынок", "2) Курский вокзал - 3я Владимирская ул.",
+        "3) Чертановская - Чистые пруды", "4) Бульвар Рокоссовского - Курский вокзал",
+        "5) Белорусский вокзал - Рижская", "6) Братцево - Сокол", "6к) Братцево - Восточный мост",
+        "7) Бульвар Рокоссовского - Белорусский вокзал", "10) Улица Кулакова - метро Щукинская",
+        "11) Останкино - Восточное Измайлово", "12) Дубровка - Восточное Измайлово",
+        "13) Метрогородок - Каланчёвская улица", "14) Октябрьская - Университет",
+        "15) Таллинская улица - Сокол", "16) Чертаново Южное - Даниловская мануфактура",
+        "17) Медведково - Останкино", "21) Таллинская улица - Щукинская",
+        "23) Михалково - Сокол", "25) Останкино - Сокольники", "26) Университет - Октябрьская",
+        "27) Дмитровская - Войковская", "28) Проспект Маршала Жукова - Сокол",
+        "29) Дмитровская - Михалково", "30) Улица Кулакова - Михалково",
+        "31) Проспект Маршала Жукова - Войковская", "32) Курский вокзал - Партизанская",
+        "36) Метрогородок - Новогиреево", "37) Новогиреево - Каланчёвская улица",
+        "38) Черёмушки - ДК Компрессор", "39) Чистые пруды - Университет",
+        "43) Угрешская - Сокольники", "46) Метрогородок - Калитники",
+        "47) Нагатино - Октябрьская", "49) Нагатино - Даниловская Мануфактура",
+        "50) ДК Компрессор - Новослободская"
+    ];
+    
+    function escapeHtml(str) { if(!str) return ''; return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+    function loadTramReviews() { var saved = localStorage.getItem(TRAM_STORAGE_KEY); if(saved){ try{ tramReviews = JSON.parse(saved); }catch(e){ tramReviews = []; } } }
+    function saveTramReviews() { localStorage.setItem(TRAM_STORAGE_KEY, JSON.stringify(tramReviews)); }
+    
+    window.addTramReview = function() {
+        var route = document.getElementById('tramReviewSelect') ? document.getElementById('tramReviewSelect').value : '';
+        var rating = document.querySelector('input[name="tramRating"]:checked');
+        var author = document.getElementById('tramAuthorInput') ? document.getElementById('tramAuthorInput').value : '';
+        var text = document.getElementById('tramReviewText') ? document.getElementById('tramReviewText').value : '';
+        if(!route){ alert('❌ Выберите маршрут'); return; }
+        if(!rating){ alert('❌ Поставьте оценку от 1 до 5'); return; }
+        if(!text.trim()){ alert('❌ Напишите текст отзыва'); return; }
+        var newReview = { id: Date.now(), route: route, rating: parseInt(rating.value), text: text.trim(), author: author.trim() || 'Аноним', date: new Date().toLocaleString('ru-RU') };
+        tramReviews.unshift(newReview);
+        saveTramReviews();
+        if(document.getElementById('tramReviewSelect')) document.getElementById('tramReviewSelect').value = '';
+        if(document.querySelector('input[name="tramRating"]:checked')) document.querySelector('input[name="tramRating"]:checked').checked = false;
+        if(document.getElementById('tramAuthorInput')) document.getElementById('tramAuthorInput').value = '';
+        if(document.getElementById('tramReviewText')) document.getElementById('tramReviewText').value = '';
+        renderTramReviewsList();
+        alert('✅ Отзыв добавлен!');
+    };
+    
+    window.deleteTramReview = function(id) {
+        if(confirm('Удалить этот отзыв?')){
+            tramReviews = tramReviews.filter(function(r){ return r.id !== id; });
+            saveTramReviews();
+            renderTramReviewsList();
+        }
+    };
+    
+    window.filterTramReviews = function() { renderTramReviewsList(); };
+    window.clearTramReviewsFilter = function() { var filterInput = document.getElementById('tramReviewsFilterInput'); if(filterInput) filterInput.value = ''; renderTramReviewsList(); };
+    
+    function renderTramReviewsList() {
+        var container = document.getElementById('tramReviewsListContainer');
+        if(!container) return;
+        var filterInput = document.getElementById('tramReviewsFilterInput');
+        var filterValue = filterInput ? filterInput.value.toLowerCase() : '';
+        var filtered = tramReviews;
+        if(filterValue){ filtered = tramReviews.filter(function(r){ return r.route.toLowerCase().indexOf(filterValue) !== -1; }); }
+        if(filtered.length === 0){ container.innerHTML = '<div style="text-align:center; color:#999; padding:30px;">📭 Нет отзывов о трамваях. Будьте первым!</div>'; return; }
+        var html = '';
+        for(var i=0;i<filtered.length;i++){
+            var r = filtered[i];
+            html += '<div class="review-card" style="border-left-color:#FF8C00;">';
+            html += '<button class="delete-review" onclick="deleteTramReview('+r.id+')">✕ Удалить</button>';
+            html += '<div class="review-station">🚊 '+escapeHtml(r.route)+'</div>';
+            html += '<div class="review-rating">⭐ '+r.rating+'/5</div>';
+            html += '<div class="review-date">📅 '+escapeHtml(r.date)+'</div>';
+            html += '<div class="review-text">'+escapeHtml(r.text)+'</div>';
+            html += '<div style="font-size:10px; color:#999;">👤 '+escapeHtml(r.author)+'</div>';
+            html += '</div>';
+        }
+        container.innerHTML = html;
+    }
+    
+    // Добавляем вкладку отзывов для трамваев в общую вкладку
+    var originalShowReviewsTab = window.showReviewsTab;
+    window.showReviewsTab = function() {
+        var sidebar = document.getElementById('sidebar');
+        if(!sidebar) return;
+        var tramOptions = '<option value="">-- Выберите маршрут --</option>';
+        for(var i=0;i<TRAM_ROUTES.length;i++){ tramOptions += '<option value="'+TRAM_ROUTES[i]+'">'+TRAM_ROUTES[i]+'</option>'; }
+        sidebar.innerHTML = `
+            <h2>📝 Отзывы</h2>
+            <div style="display:flex; gap:10px; margin-bottom:15px; background:#e9ecef; border-radius:8px; padding:4px;">
+                <button id="reviewsMCDBtn" style="flex:1; padding:8px; border:none; border-radius:6px; cursor:pointer; font-weight:bold; background:#1a3b5d; color:white;">🚆 МЦД/МЦК</button>
+                <button id="reviewsTramBtn" style="flex:1; padding:8px; border:none; border-radius:6px; cursor:pointer; font-weight:bold; background:transparent;">🚊 Трамваи</button>
+            </div>
+            <div id="reviewsMCDPanel">
+                <div class="review-form">
+                    <h3 style="font-size:14px; margin:0 0 10px 0;">✨ Оставить отзыв о станции</h3>
+                    <select id="reviewStationSelect" class="station-select"><option value="">-- Выберите станцию --</option></select>
+                    <div class="star-rating">
+                        <input type="radio" name="stationRating" value="5" id="rate5"><label for="rate5">★</label>
+                        <input type="radio" name="stationRating" value="4" id="rate4"><label for="rate4">★</label>
+                        <input type="radio" name="stationRating" value="3" id="rate3"><label for="rate3">★</label>
+                        <input type="radio" name="stationRating" value="2" id="rate2"><label for="rate2">★</label>
+                        <input type="radio" name="stationRating" value="1" id="rate1"><label for="rate1">★</label>
+                    </div>
+                    <input type="text" id="reviewAuthorInput" placeholder="Ваше имя (необязательно)">
+                    <textarea id="reviewTextInput" placeholder="Поделитесь впечатлениями о станции..." rows="3"></textarea>
+                    <button class="btn-submit" onclick="addStationReview()">📝 Отправить отзыв</button>
+                </div>
+                <div class="filter-section">
+                    <input type="text" id="reviewsFilterInput" placeholder="🔍 Фильтр по станции">
+                    <button class="btn-filter" onclick="filterStationReviews()">Найти</button>
+                    <button class="btn-filter-clear" onclick="clearReviewsFilter()">Очистить</button>
+                </div>
+                <div id="reviewsListContainer" class="reviews-list"></div>
+            </div>
+            <div id="reviewsTramPanel" style="display:none;">
+                <div class="review-form">
+                    <h3 style="font-size:14px; margin:0 0 10px 0;">✨ Оставить отзыв о трамвайном маршруте</h3>
+                    <select id="tramReviewSelect" class="station-select">${tramOptions}</select>
+                    <div class="star-rating">
+                        <input type="radio" name="tramRating" value="5" id="tramRate5"><label for="tramRate5">★</label>
+                        <input type="radio" name="tramRating" value="4" id="tramRate4"><label for="tramRate4">★</label>
+                        <input type="radio" name="tramRating" value="3" id="tramRate3"><label for="tramRate3">★</label>
+                        <input type="radio" name="tramRating" value="2" id="tramRate2"><label for="tramRate2">★</label>
+                        <input type="radio" name="tramRating" value="1" id="tramRate1"><label for="tramRate1">★</label>
+                    </div>
+                    <input type="text" id="tramAuthorInput" placeholder="Ваше имя (необязательно)">
+                    <textarea id="tramReviewText" placeholder="Поделитесь впечатлениями о маршруте..." rows="3"></textarea>
+                    <button class="btn-submit" onclick="addTramReview()">📝 Отправить отзыв</button>
+                </div>
+                <div class="filter-section">
+                    <input type="text" id="tramReviewsFilterInput" placeholder="🔍 Фильтр по маршруту">
+                    <button class="btn-filter" onclick="filterTramReviews()">Найти</button>
+                    <button class="btn-filter-clear" onclick="clearTramReviewsFilter()">Очистить</button>
+                </div>
+                <div id="tramReviewsListContainer" class="reviews-list"></div>
+            </div>
+        `;
+        
+        // Заполняем список станций
+        var stationSelect = document.getElementById('reviewStationSelect');
+        if(stationSelect && window.ALL_STATIONS_FOR_REVIEWS){
+            for(var i=0;i<window.ALL_STATIONS_FOR_REVIEWS.length;i++){
+                var opt = document.createElement('option');
+                opt.value = window.ALL_STATIONS_FOR_REVIEWS[i];
+                opt.textContent = window.ALL_STATIONS_FOR_REVIEWS[i];
+                stationSelect.appendChild(opt);
+            }
+        }
+        
+        // Переключение между панелями
+        document.getElementById('reviewsMCDBtn').onclick = function(){
+            document.getElementById('reviewsMCDBtn').style.background = '#1a3b5d';
+            document.getElementById('reviewsMCDBtn').style.color = 'white';
+            document.getElementById('reviewsTramBtn').style.background = 'transparent';
+            document.getElementById('reviewsTramBtn').style.color = 'black';
+            document.getElementById('reviewsMCDPanel').style.display = 'block';
+            document.getElementById('reviewsTramPanel').style.display = 'none';
+        };
+        document.getElementById('reviewsTramBtn').onclick = function(){
+            document.getElementById('reviewsTramBtn').style.background = '#1a3b5d';
+            document.getElementById('reviewsTramBtn').style.color = 'white';
+            document.getElementById('reviewsMCDBtn').style.background = 'transparent';
+            document.getElementById('reviewsMCDBtn').style.color = 'black';
+            document.getElementById('reviewsMCDPanel').style.display = 'none';
+            document.getElementById('reviewsTramPanel').style.display = 'block';
+        };
+        
+        if(window.loadReviews) window.loadReviews();
+        if(window.renderReviewsList) window.renderReviewsList();
+        loadTramReviews();
+        renderTramReviewsList();
+    };
+    
+    loadTramReviews();
+    console.log('✅ Отзывы для трамваев загружены');
+})();
+</script>
 </body>
 </html>
