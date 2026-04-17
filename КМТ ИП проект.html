@@ -5,6 +5,294 @@
     <title>КМТ - Все линии МЦД, пригородные направления, трамваи и автобусы</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <style>
+/* Стили для крестика закрытия */
+.welcome-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: rgba(255,255,255,0.2);
+    border: none;
+    color: white;
+    font-size: 28px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.welcome-close:hover {
+    background: rgba(255,255,255,0.4);
+    transform: scale(1.1);
+    color: #32CD32;
+}
+/* Стили для поиска маршрута трамвая */
+.tram-route-search input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 5px;
+    border: 1px solid #FF8C00;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.tram-route-search input:focus {
+    outline: none;
+    border-color: #e07c00;
+    box-shadow: 0 0 5px rgba(255,140,0,0.3);
+}
+
+.tram-route-search button {
+    padding: 8px;
+    font-size: 12px;
+}
+
+#tramRouteInfo {
+    background: white;
+    border-radius: 8px;
+    padding: 10px;
+    margin-top: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    animation: slideIn 0.3s;
+}
+/* ========== ПРИВЕТСТВЕННОЕ МОДАЛЬНОЕ ОКНО ========== */
+// Проверяем, нужно ли показывать приветственное окно
+function checkWelcomeModal() {
+    // Если уже был выбор, не показываем окно
+    const savedVersion = localStorage.getItem('siteVersion');
+    if (savedVersion) {
+        const modal = document.getElementById('welcomeModal');
+        if (modal) {
+            modal.style.display = 'none';
+        }
+        // Применяем сохранённую версию
+        if (savedVersion === 'mobile') {
+            document.body.classList.add('mobile-version');
+        } else {
+            document.body.classList.add('pc-version');
+        }
+        // Загружаем сохранённые настройки оптимизации
+        const savedSettings = localStorage.getItem('optimizationSettings');
+        if (savedSettings) {
+            try {
+                const settings = JSON.parse(savedSettings);
+                if (settings.simpleMarkers) window.simpleMarkersMode = true;
+                if (settings.lightMode) window.lightModeEnabled = true;
+            } catch(e) {}
+        }
+        return false;
+    }
+    return true;
+}
+.welcome-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    z-index: 20000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.5s;
+}
+
+.welcome-close:hover {
+    transform: scale(1.1);
+    color: #32CD32;
+}
+
+.welcome-content h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    color: #32CD32;
+}
+
+.welcome-content h2 {
+    font-size: 16px;
+    margin-bottom: 20px;
+    opacity: 0.9;
+}
+
+.welcome-content p {
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.welcome-content .author {
+    background: rgba(255,255,255,0.15);
+    padding: 12px;
+    border-radius: 15px;
+    margin: 15px 0;
+    font-size: 13px;
+}
+
+.welcome-section {
+    margin: 20px 0;
+    text-align: left;
+}
+
+.welcome-section h3 {
+    font-size: 16px;
+    margin-bottom: 12px;
+    color: #32CD32;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.mode-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin: 15px 0;
+}
+
+.mode-btn {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.mode-btn.pc {
+    background: #1a3b5d;
+    color: white;
+    border: 2px solid white;
+}
+
+.mode-btn.mobile {
+    background: #32CD32;
+    color: white;
+}
+
+.mode-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.optimization-options {
+    background: rgba(255,255,255,0.1);
+    border-radius: 15px;
+    padding: 15px;
+    margin: 15px 0;
+}
+
+.optimization-options label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.optimization-options input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.enter-btn {
+    background: #32CD32;
+    color: white;
+    border: none;
+    padding: 14px 30px;
+    border-radius: 30px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+    width: 100%;
+    transition: all 0.3s;
+}
+
+.enter-btn:hover {
+    background: #28a428;
+    transform: scale(1.02);
+}
+
+.warning-note {
+    font-size: 11px;
+    margin-top: 15px;
+    opacity: 0.7;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+<!-- ПРИВЕТСТВЕННОЕ ОКНО -->
+<div id="welcomeModal" class="welcome-modal">
+ <div class="welcome-content" style="position: relative;">
+    <button class="welcome-close" onclick="closeWelcomeModal()" style="position: absolute; top: 15px; right: 20px; background: rgba(255,255,255,0.2); border: none; color: white; font-size: 28px; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center;">✕</button>
+    
+    <h1>🚆 КМТ</h1>
+    <h2>Карта Московских Центральных Диаметров</h2>
+    
+    <div class="author">
+        👥 <strong>Разработчики:</strong> Шимко, Исмоилов, Карамалишоев<br>
+        📚 <strong>Группа:</strong> 3ПМ3519-1<br>
+        🎓 <strong>Цель проекта:</strong> Создание интерактивной карты транспортной системы Москвы с возможностью поиска маршрутов, отзывов и оценок станций
+    </div>
+    
+    <div class="welcome-section">
+        <h3>📱 Выберите режим просмотра</h3>
+        <div class="mode-buttons">
+            <button class="mode-btn pc" onclick="selectMode('pc')">💻 ПК версия</button>
+            <button class="mode-btn mobile" onclick="selectMode('mobile')">📱 Телефон</button>
+        </div>
+    </div>
+    
+    <div class="welcome-section">
+        <h3>⚡ Оптимизация для слабых устройств</h3>
+        <div class="optimization-options">
+            <label>
+                <input type="checkbox" id="optHideTrams">
+                🚊 Скрыть трамвайные маршруты
+            </label>
+            <label>
+                <input type="checkbox" id="optHideBuses">
+                🚌 Скрыть автобусные остановки
+            </label>
+            <label>
+                <input type="checkbox" id="optHideAttractions">
+                🏛️ Скрыть достопримечательности
+            </label>
+            <label>
+                <input type="checkbox" id="optHideRiver">
+                🚤 Скрыть речной транспорт
+            </label>
+            <label>
+                <input type="checkbox" id="optSimpleMarkers">
+                🔘 Упростить маркеры (точки вместо иконок)
+            </label>
+            <label>
+                <input type="checkbox" id="optLightMode">
+                ⚡ Лёгкий режим (отключить анимации и тени)
+            </label>
+        </div>
+    </div>
+    
+    <button class="enter-btn" onclick="startApp()">🚀 Перейти к карте</button>
+    <div class="warning-note">⚠️ Все станции МЦД и пригородных направлений отображаются полностью! Оптимизация не влияет на них.</div>
+</div>
         * {
             margin: 0;
             padding: 0;
@@ -692,10 +980,182 @@
     font-weight: bold;
     margin-left: 5px;
 }
+/* ========== МОБИЛЬНАЯ ВЕРСИЯ (ВКЛЮЧАЕТСЯ КНОПКОЙ) ========== */
+
+/* ПК версия - ничего не меняем */
+.pc-version .sidebar {
+    width: 350px;
+}
+.pc-version .main-container {
+    flex-direction: row;
+}
+.pc-version #map {
+    height: 100%;
+}
+
+/* Мобильная версия */
+.mobile-version .header {
+    flex-direction: column;
+    padding: 8px 12px;
+    gap: 8px;
+}
+.mobile-version .header h1 {
+    font-size: 12px;
+    text-align: center;
+}
+.mobile-version .header h1 span {
+    font-size: 9px;
+}
+.mobile-version .header > div {
+    width: 100%;
+    justify-content: space-between;
+}
+.mobile-version #moscow-time {
+    font-size: 11px;
+    padding: 3px 10px;
+}
+.mobile-version .nav-menu a {
+    font-size: 11px;
+    padding: 4px 8px;
+}
+.mobile-version .main-container {
+    flex-direction: column;
+    height: calc(100vh - 85px);
+}
+.mobile-version .sidebar {
+    width: 100%;
+    height: 40%;
+    border-right: none;
+    border-bottom: 2px solid #dee2e6;
+    padding: 10px;
+    order: 2;
+}
+.mobile-version #map {
+    height: 60%;
+    order: 1;
+}
+.mobile-version .tabs {
+    gap: 4px;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 5px;
+}
+.mobile-version .tab-button {
+    white-space: nowrap;
+    font-size: 10px;
+    padding: 6px 10px;
+}
+.mobile-version .route-search input,
+.mobile-version .route-search button {
+    padding: 8px;
+    font-size: 12px;
+}
+.mobile-version .station-item {
+    font-size: 10px;
+    padding: 3px 5px;
+}
+.mobile-version .station-group h3 {
+    font-size: 12px;
+}
+.mobile-version .legend {
+    bottom: 10px;
+    right: 10px;
+    min-width: 200px;
+    max-width: 200px;
+    max-height: 50vh;
+    padding: 8px;
+    font-size: 9px;
+}
+.mobile-version .legend-section h4 {
+    font-size: 10px;
+}
+.mobile-version .legend-item {
+    font-size: 9px;
+}
+.mobile-version .legend-line {
+    width: 15px;
+    height: 3px;
+}
+.mobile-version .legend-note {
+    font-size: 8px;
+}
+.mobile-version .bus-item,
+.mobile-version .tram-item,
+.mobile-version .attraction-item {
+    padding: 6px;
+    font-size: 10px;
+}
+.mobile-version .review-modal-content {
+    width: 95%;
+    max-width: 95%;
+}
+.mobile-version .star {
+    font-size: 30px;
+}
     </style>
 </head>
 <body>
+<!-- ПРИВЕТСТВЕННОЕ ОКНО -->
+<div id="welcomeModal" class="welcome-modal">
+    <div class="welcome-content">
+        <h1>🚆 КМТ</h1>
+        <h2>Карта Московских Центральных Диаметров</h2>
+        
+        <div class="author">
+            👥 <strong>Разработчики:</strong> Шимко, Исмоилов, Карамалишоев<br>
+            📚 <strong>Группа:</strong> 3ПМ3519-1<br>
+            🎓 <strong>Цель проекта:</strong> Создание интерактивной карты транспортной системы Москвы с возможностью поиска маршрутов, отзывов и оценок станций
+        </div>
+        
+        <div class="welcome-section">
+            <h3>📱 Выберите режим просмотра</h3>
+            <div class="mode-buttons">
+                <button class="mode-btn pc" onclick="selectMode('pc')">💻 ПК версия</button>
+                <button class="mode-btn mobile" onclick="selectMode('mobile')">📱 Телефон</button>
+            </div>
+        </div>
+        
+        <div class="welcome-section">
+            <h3>⚡ Оптимизация для слабых устройств</h3>
+            <div class="optimization-options">
+                <label>
+                    <input type="checkbox" id="optHideTrams">
+                    🚊 Скрыть трамвайные маршруты
+                </label>
+                <label>
+                    <input type="checkbox" id="optHideBuses">
+                    🚌 Скрыть автобусные остановки
+                </label>
+                <label>
+                    <input type="checkbox" id="optHideAttractions">
+                    🏛️ Скрыть достопримечательности
+                </label>
+                <label>
+                    <input type="checkbox" id="optHideRiver">
+                    🚤 Скрыть речной транспорт
+                </label>
+                <label>
+                    <input type="checkbox" id="optSimpleMarkers">
+                    🔘 Упростить маркеры (точки вместо иконок)
+                </label>
+                <label>
+                    <input type="checkbox" id="optLightMode">
+                    ⚡ Лёгкий режим (отключить анимации и тени)
+                </label>
+            </div>
+        </div>
+        
+        <button class="enter-btn" onclick="startApp()">🚀 Перейти к карте</button>
+        <div class="warning-note">⚠️ Все станции МЦД и пригородных направлений отображаются полностью! Оптимизация не влияет на них.</div>
+    </div>
+</div>
+
     <div class="header">
+<!-- Переключатель версий -->
+<div id="versionSwitcher" style="position: fixed; top: 70px; right: 10px; z-index: 10000; background: white; border-radius: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.2); overflow: hidden; display: flex; font-size: 12px;">
+    <button onclick="setVersion('pc')" id="pcVersionBtn" style="padding: 8px 15px; border: none; cursor: pointer; background: #1a3b5d; color: white; font-weight: bold;">💻 ПК</button>
+    <button onclick="setVersion('mobile')" id="mobileVersionBtn" style="padding: 8px 15px; border: none; cursor: pointer; background: #e9ecef; color: #666; font-weight: bold;">📱 Телефон</button>
+</div>
         <div style="display: flex; align-items: center;">
             <h1>Индивидуальный проект КМТ<br>
             <span>Группа 3ПМ3519-1 | Шимко, Исмоилов, Карамалишоев</span></h1>
@@ -713,9 +1173,27 @@
     </div>
     
     <div class="main-container">
+<!-- Кнопка для показа легенды на телефонах -->
+<button id="mobileLegendBtn" style="display: none; position: fixed; bottom: 20px; right: 20px; background: #1a3b5d; color: white; border: none; border-radius: 50%; width: 50px; height: 50px; font-size: 24px; cursor: pointer; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.3);">
+    📖
+</button>
         <div class="sidebar" id="sidebar">
             <h2 class="d4">🚆 Поиск маршрута</h2>
             <div class="route-search">
+<!-- Отдельный блок поиска маршрута для трамваев -->
+<div style="margin-top: 15px; border-top: 2px solid #FF8C00; padding-top: 10px;">
+    <h3 style="font-size: 13px; color: #FF8C00; margin-bottom: 8px;">🚊 Поиск маршрута трамвая</h3>
+    <div class="tram-route-search">
+        <input type="text" id="tramFromStation" placeholder="Откуда (остановка)" list="tram-stations-list">
+        <input type="text" id="tramToStation" placeholder="Куда (остановка)" list="tram-stations-list">
+        <datalist id="tram-stations-list"></datalist>
+        <div style="display: flex; gap: 5px; margin-top: 5px;">
+            <button onclick="findTramRoute()" style="flex: 2; background: #FF8C00;">🚊 Найти маршрут трамвая</button>
+            <button onclick="clearTramRoute()" style="flex: 1; background: #6c757d;">✕ Очистить</button>
+        </div>
+        <div id="tramRouteInfo" style="margin-top: 10px; display: none;"></div>
+    </div>
+</div>
                 <input type="text" id="fromStation" placeholder="Откуда" value="Москва Товарная" list="stations-list">
                 <input type="text" id="toStation" placeholder="Куда" value="Тестовская" list="stations-list">
                 <!-- Добавленное поле для времени -->
@@ -6087,13 +6565,14 @@
             }
         }
 
-        function initMap() {
-            map = L.map('map').setView([55.75, 37.6], 10);
-            
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '© OpenStreetMap'
-            }).addTo(map);
-
+function initMap() {
+    map = L.map('map').setView([55.75, 37.6], 10);
+    
+    // ЭТО ЗАМЕНИЛ — теперь OpenStreetMap вместо Google
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+    
             addStationsToLayer(d4Stations, '#32CD32', 'd4');
             addStationsToLayer(d3Stations, '#f56a00', 'd3');
             addStationsToLayer(d2Stations, '#FF69B4', 'd2');
@@ -6686,6 +7165,627 @@ window.onclick = function(event) {
     
     console.log('✅ Скрипт готов! Кликните на станцию на карте → появится кнопка "Посмотреть расписание"');
 })();
+// ========== ПЕРЕКЛЮЧАТЕЛЬ ПК / ТЕЛЕФОН ==========
+
+function setVersion(version) {
+    localStorage.setItem('siteVersion', version);
+    
+    if (version === 'mobile') {
+        document.body.classList.add('mobile-version');
+        document.body.classList.remove('pc-version');
+        document.getElementById('pcVersionBtn').style.background = '#e9ecef';
+        document.getElementById('pcVersionBtn').style.color = '#666';
+        document.getElementById('mobileVersionBtn').style.background = '#1a3b5d';
+        document.getElementById('mobileVersionBtn').style.color = 'white';
+        showMessage('📱 Мобильная версия включена');
+    } else {
+        document.body.classList.add('pc-version');
+        document.body.classList.remove('mobile-version');
+        document.getElementById('pcVersionBtn').style.background = '#1a3b5d';
+        document.getElementById('pcVersionBtn').style.color = 'white';
+        document.getElementById('mobileVersionBtn').style.background = '#e9ecef';
+        document.getElementById('mobileVersionBtn').style.color = '#666';
+        showMessage('💻 ПК версия включена');
+    }
+    
+    if (typeof map !== 'undefined' && map) {
+        setTimeout(() => map.invalidateSize(), 100);
+    }
+}
+
+function showMessage(text) {
+    let msg = document.getElementById('versionMessage');
+    if (!msg) {
+        msg = document.createElement('div');
+        msg.id = 'versionMessage';
+        msg.style.cssText = 'position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#32CD32; color:white; padding:10px 20px; border-radius:30px; z-index:10001; font-size:14px; font-weight:bold; box-shadow:0 2px 10px rgba(0,0,0,0.2); animation:fadeMsg 2s ease;';
+        document.body.appendChild(msg);
+        
+        const style = document.createElement('style');
+        style.textContent = '@keyframes fadeMsg { 0%{opacity:0;transform:translateX(-50%) translateY(20px)} 15%{opacity:1;transform:translateX(-50%) translateY(0)} 85%{opacity:1} 100%{opacity:0;transform:translateX(-50%) translateY(-20px)} }';
+        document.head.appendChild(style);
+    }
+    msg.textContent = text;
+    msg.style.display = 'block';
+    setTimeout(() => { msg.style.display = 'none'; }, 2000);
+}
+
+function loadSavedVersion() {
+    const saved = localStorage.getItem('siteVersion');
+    if (saved === 'mobile') {
+        setVersion('mobile');
+    } else if (saved === 'pc') {
+        setVersion('pc');
+    } else {
+        if (window.innerWidth <= 768) setVersion('mobile');
+        else setVersion('pc');
+    }
+}
+
+document.addEventListener('DOMContentLoaded', loadSavedVersion);
+// ========== ПРИВЕТСТВЕННОЕ ОКНО И ОПТИМИЗАЦИЯ ==========
+
+let selectedMode = null;
+let optimizationSettings = {
+    hideTrams: false,
+    hideBuses: false,
+    hideAttractions: false,
+    hideRiver: false,
+    simpleMarkers: false,
+    // Убираем reduceStations — станции не трогаем!
+    lightMode: false  // Легкий режим: отключает анимации и тени
+};
+
+// Выбор режима
+function selectMode(mode) {
+    selectedMode = mode;
+    document.querySelectorAll('.mode-btn').forEach(btn => {
+        btn.style.opacity = '0.6';
+    });
+    if (mode === 'pc') {
+        document.querySelector('.mode-btn.pc').style.opacity = '1';
+    } else {
+        document.querySelector('.mode-btn.mobile').style.opacity = '1';
+    }
+}
+
+// Запуск приложения
+function startApp() {
+    if (!selectedMode) {
+        alert('Пожалуйста, выберите режим просмотра (ПК или Телефон)');
+        return;
+    }
+    
+    // Сохраняем настройки оптимизации
+    optimizationSettings = {
+        hideTrams: document.getElementById('optHideTrams').checked,
+        hideBuses: document.getElementById('optHideBuses').checked,
+        hideAttractions: document.getElementById('optHideAttractions').checked,
+        hideRiver: document.getElementById('optHideRiver').checked,
+        simpleMarkers: document.getElementById('optSimpleMarkers').checked,
+        lightMode: document.getElementById('optLightMode').checked
+    };
+    
+    // Сохраняем в localStorage
+    localStorage.setItem('siteVersion', selectedMode);
+    localStorage.setItem('optimizationSettings', JSON.stringify(optimizationSettings));
+    
+    // Закрываем модальное окно
+    document.getElementById('welcomeModal').style.display = 'none';
+    
+    // Применяем настройки
+    applyOptimization();
+    
+    setTimeout(() => {
+        showStartNotification();
+    }, 100);
+}
+
+// Применение оптимизации (НЕ ТРОГАЕМ СТАНЦИИ!)
+function applyOptimization() {
+    const settings = optimizationSettings;
+    
+    // Упрощённые маркеры (только для нестанционных объектов)
+    if (settings.simpleMarkers) {
+        window.simpleMarkersMode = true;
+    }
+    
+    // Лёгкий режим — отключаем анимации и тени
+    if (settings.lightMode) {
+        const style = document.createElement('style');
+        style.textContent = `
+            .custom-marker, .transfer-marker, .bus-stop-marker, 
+            .attraction-marker, .tram-stop-marker {
+                transition: none !important;
+            }
+            .custom-marker:hover, .transfer-marker:hover {
+                transform: none !important;
+            }
+            .bus-item, .tram-item, .attraction-item {
+                transition: none !important;
+                box-shadow: none !important;
+            }
+            .bus-item:hover, .tram-item:hover, .attraction-item:hover {
+                transform: none !important;
+            }
+        `;
+        document.head.appendChild(style);
+    }
+    
+    // Скрытие второстепенных элементов (станции остаются!)
+    setTimeout(() => {
+        if (settings.hideTrams && document.getElementById('chk-all-trams')) {
+            document.getElementById('chk-all-trams').checked = false;
+            if (typeof toggleAllTrams === 'function') toggleAllTrams();
+        }
+        if (settings.hideBuses && document.getElementById('chk-all-bus-stops')) {
+            document.getElementById('chk-all-bus-stops').checked = false;
+            if (typeof toggleAllBusStops === 'function') toggleAllBusStops();
+        }
+        if (settings.hideAttractions && document.getElementById('chk-attractions')) {
+            document.getElementById('chk-attractions').checked = false;
+            if (typeof toggleAttractions === 'function') toggleAttractions();
+        }
+        if (settings.hideRiver && document.getElementById('chk-all-rivers')) {
+            document.getElementById('chk-all-rivers').checked = false;
+            if (typeof toggleAllRiverRoutes === 'function') toggleAllRiverRoutes();
+        }
+    }, 500);
+}
+
+// Уведомление о запуске
+function showStartNotification() {
+    let msg = '✅ ' + (selectedMode === 'pc' ? 'ПК режим' : 'Мобильный режим');
+    if (optimizationSettings.lightMode) msg += ' (лёгкий)';
+    if (optimizationSettings.hideTrams) msg += ' • без трамваев';
+    
+    const notification = document.createElement('div');
+    notification.textContent = msg;
+    notification.style.cssText = `
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #32CD32;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 30px;
+        z-index: 10001;
+        font-size: 13px;
+        font-weight: bold;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        animation: fadeOut 3s ease forwards;
+    `;
+    document.body.appendChild(notification);
+    setTimeout(() => notification.remove(), 3000);
+}
+
+// Загружаем сохранённые настройки
+function loadOptimizationSettings() {
+    const savedSettings = localStorage.getItem('optimizationSettings');
+    if (savedSettings) {
+        const settings = JSON.parse(savedSettings);
+        if (settings.simpleMarkers) window.simpleMarkersMode = true;
+        if (settings.lightMode) window.lightModeEnabled = true;
+    }
+}
+
+loadOptimizationSettings();
+// ========== СИСТЕМА МАРШРУТОВ ДЛЯ ТРАМВАЕВ ==========
+
+// Сбор всех трамвайных остановок в единый список
+let allTramStops = [];
+let currentTramRouteLine = null;
+let currentTramRouteMarkers = [];
+
+// Сбор всех остановок со всех маршрутов
+function buildTramStopsList() {
+    allTramStops = [];
+    for (let routeId in tramRoutes) {
+        const route = tramRoutes[routeId];
+        route.stops.forEach(stop => {
+            allTramStops.push({
+                name: stop.name,
+                coords: stop.coords,
+                routes: [routeId]
+            });
+        });
+    }
+    
+    // Объединяем остановки с одинаковыми названиями
+    const uniqueStops = new Map();
+    allTramStops.forEach(stop => {
+        if (uniqueStops.has(stop.name)) {
+            uniqueStops.get(stop.name).routes.push(...stop.routes);
+        } else {
+            uniqueStops.set(stop.name, {
+                name: stop.name,
+                coords: stop.coords,
+                routes: [...stop.routes]
+            });
+        }
+    });
+    allTramStops = Array.from(uniqueStops.values());
+    
+    // Заполняем datalist
+    const datalist = document.getElementById('tram-stations-list');
+    if (datalist) {
+        datalist.innerHTML = '';
+        allTramStops.forEach(stop => {
+            const option = document.createElement('option');
+            option.value = stop.name;
+            datalist.appendChild(option);
+        });
+    }
+    console.log(`🚊 Загружено ${allTramStops.length} трамвайных остановок`);
+}
+
+// Поиск остановки по названию
+function findTramStop(name) {
+    return allTramStops.find(stop => 
+        stop.name.toLowerCase().includes(name.toLowerCase()) ||
+        name.toLowerCase().includes(stop.name.toLowerCase())
+    );
+}
+
+// Получение станций между остановками на одном маршруте
+function getTramStopsBetween(fromStop, toStop, routeId) {
+    const route = tramRoutes[routeId];
+    if (!route) return [];
+    
+    const stops = route.stops;
+    const fromIndex = stops.findIndex(s => s.name === fromStop.name);
+    const toIndex = stops.findIndex(s => s.name === toStop.name);
+    
+    if (fromIndex === -1 || toIndex === -1) return [];
+    
+    const result = [];
+    if (fromIndex <= toIndex) {
+        for (let i = fromIndex; i <= toIndex; i++) {
+            result.push(stops[i]);
+        }
+    } else {
+        for (let i = fromIndex; i >= toIndex; i--) {
+            result.push(stops[i]);
+        }
+    }
+    return result;
+}
+
+// Нахождение общего маршрута между остановками (ИСПРАВЛЕНА)
+function findCommonRoute(fromStop, toStop) {
+    // Если это одна и та же остановка
+    if (fromStop.name === toStop.name) {
+        return {
+            type: 'direct',
+            from: fromStop,
+            to: toStop,
+            routeId: fromStop.routes[0],
+            routeName: tramRoutes[fromStop.routes[0]].name,
+            routeColor: tramRoutes[fromStop.routes[0]].color,
+            stations: [fromStop],
+            totalStops: 0
+        };
+    }
+    
+    // Находим маршруты, на которых есть обе остановки
+    const commonRoutes = fromStop.routes.filter(routeId => toStop.routes.includes(routeId));
+    
+    if (commonRoutes.length > 0) {
+        // Прямой маршрут
+        const routeId = commonRoutes[0];
+        const stations = getTramStopsBetween(fromStop, toStop, routeId);
+        if (stations.length > 0) {
+            const route = tramRoutes[routeId];
+            return {
+                type: 'direct',
+                from: fromStop,
+                to: toStop,
+                routeId: routeId,
+                routeName: route.name,
+                routeColor: route.color,
+                stations: stations,
+                totalStops: stations.length - 1
+            };
+        }
+    }
+    
+    // Поиск маршрута с пересадкой
+    let bestTransfer = null;
+    
+    for (let fromRouteId of fromStop.routes) {
+        const fromRoute = tramRoutes[fromRouteId];
+        if (!fromRoute) continue;
+        
+        for (let toRouteId of toStop.routes) {
+            const toRoute = tramRoutes[toRouteId];
+            if (!toRoute) continue;
+            
+            // Ищем станцию пересадки (остановка, которая есть на обоих маршрутах)
+            const transferStops = fromRoute.stops.filter(fromStopItem => 
+                toRoute.stops.some(toStopItem => toStopItem.name === fromStopItem.name)
+            );
+            
+            for (let transferStop of transferStops) {
+                const firstSegment = getTramStopsBetween(fromStop, transferStop, fromRouteId);
+                const secondSegment = getTramStopsBetween(transferStop, toStop, toRouteId);
+                
+                if (firstSegment.length > 0 && secondSegment.length > 0) {
+                    const totalStops = (firstSegment.length - 1) + (secondSegment.length - 1);
+                    if (!bestTransfer || totalStops < bestTransfer.totalStops) {
+                        bestTransfer = {
+                            transferStop: transferStop,
+                            fromRouteId: fromRouteId,
+                            fromRouteName: fromRoute.name,
+                            fromRouteColor: fromRoute.color,
+                            toRouteId: toRouteId,
+                            toRouteName: toRoute.name,
+                            toRouteColor: toRoute.color,
+                            firstSegment: firstSegment,
+                            secondSegment: secondSegment,
+                            totalStops: totalStops
+                        };
+                    }
+                }
+            }
+        }
+    }
+    
+    if (bestTransfer) {
+        return {
+            type: 'transfer',
+            from: fromStop,
+            to: toStop,
+            transfer: bestTransfer.transferStop,
+            segments: [
+                {
+                    routeId: bestTransfer.fromRouteId,
+                    routeName: bestTransfer.fromRouteName,
+                    routeColor: bestTransfer.fromRouteColor,
+                    from: fromStop,
+                    to: bestTransfer.transferStop,
+                    stations: bestTransfer.firstSegment,
+                    totalStops: bestTransfer.firstSegment.length - 1
+                },
+                {
+                    routeId: bestTransfer.toRouteId,
+                    routeName: bestTransfer.toRouteName,
+                    routeColor: bestTransfer.toRouteColor,
+                    from: bestTransfer.transferStop,
+                    to: toStop,
+                    stations: bestTransfer.secondSegment,
+                    totalStops: bestTransfer.secondSegment.length - 1
+                }
+            ],
+            totalStops: bestTransfer.totalStops
+        };
+    }
+    
+    return null;
+}
+
+// Отображение маршрута трамвая на карте
+function showTramRoute(route) {
+    const routeInfo = document.getElementById('tramRouteInfo');
+    if (!routeInfo) return;
+    
+    // Очищаем предыдущий маршрут
+    clearTramRoute();
+    
+    let allPoints = [];
+    let infoHtml = '';
+    
+    if (route.type === 'direct') {
+        const tramRouteData = tramRoutes[route.routeId];
+        if (tramRouteData && tramRouteData.points) {
+            const allRoutePoints = tramRouteData.points;
+            const stops = route.stations;
+            
+            let startIndex = -1;
+            let endIndex = -1;
+            
+            for (let i = 0; i < allRoutePoints.length; i++) {
+                const point = allRoutePoints[i];
+                for (let stop of stops) {
+                    const distance = Math.sqrt(
+                        Math.pow(point[0] - stop.coords[0], 2) + 
+                        Math.pow(point[1] - stop.coords[1], 2)
+                    );
+                    if (distance < 0.002) {
+                        if (stop === stops[0] && startIndex === -1) startIndex = i;
+                        if (stop === stops[stops.length - 1]) endIndex = i;
+                    }
+                }
+            }
+            
+            if (startIndex !== -1 && endIndex !== -1) {
+                if (startIndex <= endIndex) {
+                    allPoints = allRoutePoints.slice(startIndex, endIndex + 1);
+                } else {
+                    allPoints = allRoutePoints.slice(endIndex, startIndex + 1).reverse();
+                }
+            } else {
+                allPoints = stops.map(s => s.coords);
+            }
+        } else {
+            allPoints = route.stations.map(s => s.coords);
+        }
+        
+        infoHtml = `
+            <div style="background: ${route.routeColor}20; padding: 10px; border-radius: 8px; border-left: 4px solid ${route.routeColor};">
+                <b>🚊 Прямой маршрут</b><br>
+                <span style="font-size: 13px;">${route.from.name} → ${route.to.name}</span><br>
+                <div style="margin-top: 5px;">
+                    <span class="time-badge">🚉 ${route.totalStops} остановок</span>
+                </div>
+                <small>${route.routeName}</small>
+            </div>
+        `;
+    } else {
+        const segment1Points = getRoutePointsForSegment(route.segments[0]);
+        const segment2Points = getRoutePointsForSegment(route.segments[1]);
+        allPoints = [...segment1Points, ...segment2Points];
+        
+        infoHtml = `
+            <div style="background: linear-gradient(135deg, #FF8C00, #e07c00); padding: 10px; border-radius: 8px; color: white;">
+                <b>🚊 Маршрут с пересадкой</b><br>
+                <span style="font-size: 13px;">${route.from.name} → ${route.to.name}</span><br>
+                <div style="margin-top: 5px;">
+                    <span class="time-badge" style="background: rgba(255,255,255,0.3);">🔄 ${route.totalStops} остановок</span>
+                </div>
+            </div>
+            <div style="margin-top: 8px; padding: 8px; background: ${route.segments[0].routeColor}20; border-radius: 8px; border-left: 4px solid ${route.segments[0].routeColor};">
+                🚉 ${route.segments[0].from.name} → ${route.segments[0].to.name}<br>
+                <small>${route.segments[0].routeName}</small><br>
+                <span class="time-badge">${route.segments[0].totalStops} остановок</span>
+            </div>
+            <div style="margin-top: 5px; padding: 8px; background: ${route.segments[1].routeColor}20; border-radius: 8px; border-left: 4px solid ${route.segments[1].routeColor};">
+                🔄 ${route.segments[1].from.name} → ${route.segments[1].to.name}<br>
+                <small>${route.segments[1].routeName}</small><br>
+                <span class="time-badge">${route.segments[1].totalStops} остановок</span>
+            </div>
+        `;
+    }
+    
+    if (allPoints.length > 0) {
+        currentTramRouteLine = L.polyline(allPoints, {
+            color: '#FF4444',
+            weight: 6,
+            opacity: 0.9,
+            lineJoin: 'round',
+            lineCap: 'round'
+        }).addTo(map);
+    }
+    
+    const startIcon = L.divIcon({
+        html: '<div style="background-color: #00FF00; width: 18px; height: 18px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.5);"></div>',
+        iconSize: [24, 24]
+    });
+    
+    const endIcon = L.divIcon({
+        html: '<div style="background-color: #FF0000; width: 18px; height: 18px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.5);"></div>',
+        iconSize: [24, 24]
+    });
+    
+    const startMarker = L.marker(route.from.coords, { icon: startIcon })
+        .addTo(map)
+        .bindPopup('🚊 Отправление: ' + route.from.name);
+    
+    const endMarker = L.marker(route.to.coords, { icon: endIcon })
+        .addTo(map)
+        .bindPopup('🏁 Прибытие: ' + route.to.name);
+    
+    currentTramRouteMarkers = [startMarker, endMarker];
+    
+    if (allPoints.length > 0) {
+        const bounds = L.latLngBounds(allPoints);
+        map.fitBounds(bounds, { padding: [50, 50] });
+    }
+    
+    routeInfo.style.display = 'block';
+    routeInfo.innerHTML = infoHtml;
+}
+
+// Вспомогательная функция для получения точек маршрута между остановками
+function getRoutePointsForSegment(segment) {
+    const tramRouteData = tramRoutes[segment.routeId];
+    if (!tramRouteData || !tramRouteData.points) {
+        return segment.stations.map(s => s.coords);
+    }
+    
+    const allRoutePoints = tramRouteData.points;
+    const stops = segment.stations;
+    
+    let startIndex = -1;
+    let endIndex = -1;
+    
+    for (let i = 0; i < allRoutePoints.length; i++) {
+        const point = allRoutePoints[i];
+        
+        const distToStart = Math.sqrt(
+            Math.pow(point[0] - stops[0].coords[0], 2) + 
+            Math.pow(point[1] - stops[0].coords[1], 2)
+        );
+        if (distToStart < 0.002 && startIndex === -1) {
+            startIndex = i;
+        }
+        
+        const distToEnd = Math.sqrt(
+            Math.pow(point[0] - stops[stops.length - 1].coords[0], 2) + 
+            Math.pow(point[1] - stops[stops.length - 1].coords[1], 2)
+        );
+        if (distToEnd < 0.002) {
+            endIndex = i;
+        }
+    }
+    
+    if (startIndex !== -1 && endIndex !== -1) {
+        if (startIndex <= endIndex) {
+            return allRoutePoints.slice(startIndex, endIndex + 1);
+        } else {
+            return allRoutePoints.slice(endIndex, startIndex + 1).reverse();
+        }
+    }
+    
+    return stops.map(s => s.coords);
+}
+
+// Очистка трамвайного маршрута
+function clearTramRoute() {
+    if (currentTramRouteLine) {
+        map.removeLayer(currentTramRouteLine);
+        currentTramRouteLine = null;
+    }
+    
+    if (currentTramRouteMarkers) {
+        currentTramRouteMarkers.forEach(marker => {
+            map.removeLayer(marker);
+        });
+        currentTramRouteMarkers = [];
+    }
+    
+    const routeInfo = document.getElementById('tramRouteInfo');
+    if (routeInfo) {
+        routeInfo.style.display = 'none';
+        routeInfo.innerHTML = '';
+    }
+}
+
+// Поиск маршрута трамвая
+function findTramRoute() {
+    const from = document.getElementById('tramFromStation').value.trim();
+    const to = document.getElementById('tramToStation').value.trim();
+    
+    if (!from || !to) {
+        alert('Пожалуйста, укажите начальную и конечную остановку трамвая');
+        return;
+    }
+    
+    const fromStop = findTramStop(from);
+    const toStop = findTramStop(to);
+    
+    if (!fromStop) {
+        alert('Остановка "' + from + '" не найдена');
+        return;
+    }
+    if (!toStop) {
+        alert('Остановка "' + to + '" не найдена');
+        return;
+    }
+    
+    const route = findCommonRoute(fromStop, toStop);
+    
+    if (route) {
+        showTramRoute(route);
+    } else {
+        alert('Маршрут между этими остановками не найден. Попробуйте другие остановки.');
+    }
+}
+
+// Инициализация поиска трамваев
+setTimeout(function() {
+    buildTramStopsList();
+}, 1000);
 </script>
 <!-- Модальное окно для отзывов -->
 <div id="reviewModal" class="review-modal">
